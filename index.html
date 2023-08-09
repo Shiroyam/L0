@@ -6,9 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wildberries – Интернет-магазин модной одежды и обуви</title>
   </head>
+
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <!-- header -->
+      <header class="header">
+        <img class="header__mobile-burger" src="./src/icons/burger-mobile.svg" />
+
+        <div class="header__burger">
+          <div class="header__burger-container">
+            <img src="./src/icons/burger.svg" />
+          </div>
+          <h1 class="header__burger-title">товары и точка</h1>
+        </div>
+
+        <div class="header__input" >
+          <input class="header__input-search" placeholder="Я ищу..." >
+          <img class="header__input-svg" src="./src/icons/search.svg" >
+        </div>
+
+        <img class="header__mobile-search" src="./src/icons/search-mobile.svg" />
+
+        <div class="header__icon">
+          <div class="header__icon-card">
+            <img src="./src/icons/profile.svg" />
+            <div>Профиль</div>
+          </div>
+          <div class="header__icon-card header__icon-card--count">
+            <img src="./src/icons/cart.svg" />
+            <div>Корзина</div>
+          </div>
+        </div>
+      </header>
+    </div>
+
     <div id="modal"></div>
+
     <script type="module" src="src/main.js"></script>
   </body>
 </html>

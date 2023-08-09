@@ -4,7 +4,21 @@
   font-style: normal;
   src: local('Segoe UI Regular'), url('../fonts/Segoe UI.woff') format('woff');
 }
+
+@font-face {
+  font-family: SegoeLight;
+  font-weight: normal;
+  font-style: normal;
+  src: local('Segoe UI Light'), url('../fonts/Segoe UI Light.woff') format('woff');
+}
   
+@font-face {
+  font-family: SegoeSemibold;
+  font-weight: normal;
+  font-style: normal;
+  src: local('Segoe UI Semibold'), url('../fonts/Segoe UI Semibold.woff') format('woff');
+}
+
 @font-face {
   font-family: SegoeBold;
   font-weight: normal;

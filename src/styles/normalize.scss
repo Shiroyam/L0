@@ -11,12 +11,11 @@
 
 html {
   text-size-adjust: 100%;
-  text-size-adjust: 100%;
 }
 
 body {
   color: var(--color-black);
-  background-color: var(--color-bg);
+  background-color: var(--color-primary);
 
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -39,10 +38,6 @@ a {
 }
 
 @mixin noselect { 
-  user-select: none; 
-  user-select: none; 
-  user-select: none; 
-  user-select: none; 
   user-select: none;
 
   -webkit-touch-callout: none;
