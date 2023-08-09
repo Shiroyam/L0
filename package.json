@@ -1,0 +1,22 @@
+{
+  "name": "l0",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "vite": "4.4.5",
+    "sass": "1.64.2",
+    "husky": "8.0.3",
+    "lint-staged": "13.2.3",
+    "prettier": "3.0.0",
+    "stylelint": "15.9.0",
+    "stylelint-config-clean-order": "5.0.1",
+    "stylelint-config-standard-scss": "10.0.0"
+  }
+}
