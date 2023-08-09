@@ -1,0 +1,13 @@
+.main {
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--color-bg);
+  border-radius: 24px;
+
+  &__wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 34px 24px;
+  }
+}
