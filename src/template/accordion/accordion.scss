@@ -1,0 +1,120 @@
+.accordion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 891px;
+
+  &__arrow {
+    cursor: pointer;
+    transform: rotate(0);
+    margin-bottom: 15px;
+    transition: 250ms ease;
+  }
+
+  &__arrow--active {
+    transform: rotate(-180deg);
+    transition: 250ms ease;
+  }
+
+  &-wrapper {
+    display: flex;
+    margin-bottom: 14px;
+
+    .accordion__checkbox {
+      position: relative;
+      margin-right: 11px;
+
+      &-input {
+        cursor: pointer;
+
+        width: 22px;
+        height: 22px;
+
+        appearance: none;
+        border: none;
+        border-radius: 5px;
+        outline: 1px solid var(--color-gray);
+
+        &:checked {
+          background-color: var(--color-secondary);
+          outline: none;
+        }
+
+        &:checked + label::before {
+          cursor: pointer;
+          content: "";
+
+          position: absolute;
+          top: 5px;
+          left: 5px;
+
+          width: 12.478px;
+          height: 10.163px;
+
+          background-image: url("../../icons/checkmark.svg");
+          background-repeat: no-repeat;
+        }
+      }
+    }
+
+    &-all {
+      font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 24px;
+      color: var(--color-black);
+    }
+  }
+
+  &__count {
+    display: none;
+  }
+
+  &-wrapper-soldout {
+    font-family:
+      "Segoe UI",
+      Arial,
+      sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 24px;
+  }
+
+  &__arrow-soldout {
+    cursor: pointer;
+    transform: rotate();
+    margin-bottom: 15px;
+    transition: 250ms ease;
+  }
+
+  &__arrow-soldout--active {
+    transform: rotate(-180deg);
+    transition: 250ms ease;
+  }
+}
+
+.accordion--active {
+  .accordion__count {
+    display: inline;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  .accordion__checkbox {
+    display: none;
+  }
+
+  .accordion-wrapper-all {
+    display: none;
+  }
+}

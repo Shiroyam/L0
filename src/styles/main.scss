@@ -1,13 +1,24 @@
-.main {
+.wrapper {
   width: 100%;
   margin: 0 auto;
   background-color: var(--color-bg);
   border-radius: 24px;
 
-  &__wrapper {
+  .main {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
     padding: 34px 24px;
+
+    .cart {
+      margin-bottom: 28px;
+
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 36px;
+      color: var(--color-black);
+      letter-spacing: -0.28px;
+    }
   }
 }
