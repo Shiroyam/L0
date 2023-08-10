@@ -1,0 +1,139 @@
+{
+  "products": [
+    {
+      "id": "0",
+      "title": "Футболка UZcotton мужская",
+      "img": "./src/icons/1-product.png",
+      "color": "белый",
+      "size": "56",
+      "count": 1,
+      "price": "1051",
+      "discount": "522",
+      "IP": "Коледино WB",
+      "OOO": "OOO Вайлдберриз",
+      "availability": true
+    },
+    {
+      "id": "1",
+      "title": "Силиконовый чехол картхолдер (отверстия) для карт, прозрачный кейс бампер на Apple iPhone XR, MobiSafe",
+      "img": "./src/icons/2-product.png",
+      "color": "прозрачный",
+      "size": null,
+      "count": 200,
+      "price": "2 300 047",
+      "discount": "2 100 047",
+      "IP": "Коледино WB",
+      "OOO": "OOO Мегапрофстиль",
+      "availability": true
+    },
+    {
+      "id": "2",
+      "title": "Карандаши цветные Faber-Castell \"Замок\", набор 24 цвета, заточенные, шестигранные, Faber-Castell ",
+      "img": "./src/icons/3-product.png",
+      "color": null,
+      "size": null,
+      "count": 2,
+      "price": "950",
+      "discount": "494",
+      "IP": "Коледино WB",
+      "OOO": "OOO Вайлдберриз",
+      "availability": true
+    },
+    {
+      "id": "3",
+      "title": "Футболка UZcotton мужская",
+      "img": "./src/icons/1-product.png",
+      "color": "белый",
+      "size": "56",
+      "count": 2,
+      "price": "1051",
+      "discount": "522",
+      "IP": "Коледино WB",
+      "OOO": "OOO Вайлдберриз",
+      "availability": false
+    },
+    {
+      "id": "4",
+      "title": "Силиконовый чехол картхолдер (отверстия) для карт, прозрачный кейс бампер на Apple iPhone XR, MobiSafe",
+      "img": "./src/icons/2-product.png",
+      "color": "прозрачный",
+      "size": null,
+      "count": 0,
+      "price": "2 300 047",
+      "discount": "2 100 047",
+      "IP": "Коледино WB",
+      "OOO": "OOO Мегапрофстиль",
+      "availability": false
+    },
+    {
+      "id": "5",
+      "title": "Карандаши цветные Faber-Castell \"Замок\", набор 24 цвета, заточенные, шестигранные,Faber-Castell ",
+      "img": "./src/icons/3-product.png",
+      "color": null,
+      "size": null,
+      "count": 0,
+      "price": "950",
+      "discount": "494",
+      "IP": "Коледино WB",
+      "OOO": "OOO Вайлдберриз",
+      "availability": false
+    }
+  ],
+
+  "address": {
+    "point": [
+      {
+        "id": "0",
+        "address": "г. Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1",
+        "stars": "0"
+      },
+      {
+        "id": "1",
+        "address": "г. Бишкек, микрорайон Джал, улица Ахунбаева Исы, д. 67/1",
+        "stars": "4.99"
+      },
+      {
+        "id": "2",
+        "address": "г. Бишкек, улица Табышалиева, д. 57",
+        "stars": "4.99"
+      }
+    ],
+    "courier": [
+      {
+        "id": "0",
+        "address": "Бишкек, улица Табышалиева, 57"
+      },
+      {
+        "id": "1",
+        "address": "Бишкек, улица Жукеева-Пудовкина, 77/1"
+      },
+      {
+        "id": "2",
+        "address": "Бишкек, микрорайон Джал, улица Ахунбаева Исы, 67/1"
+      }
+    ]
+  },
+
+  "payment": [
+    {
+      "id": "0",
+      "title": "MIR",
+      "number": "1234 5678 9012 1234"
+    },
+    {
+      "id": "1",
+      "title": "VISA",
+      "number": "1234 5678 9012 1234"
+    },
+    {
+      "id": "2",
+      "title": "MASTER CARD",
+      "number": "1234 5678 9012 1234"
+    },
+    {
+      "id": "3",
+      "title": "MAESTRO",
+      "number": "1234 5678 9012 1234"
+    }
+  ]
+}
