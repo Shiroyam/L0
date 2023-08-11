@@ -1,6 +1,6 @@
 import "./accordion.scss";
 
-const cartContent = `
+export const cartContent = `
 <div class="accordion__count">266 товаров · 2 100 569 сом</div>
 <div class="accordion__checkbox">
   <input class="accordion__checkbox-input" id="checkbox-main" type="checkbox" checked/>
@@ -9,9 +9,14 @@ const cartContent = `
 <div class="accordion-wrapper-all">Выбрать все</div>
 `;
 
-const soldoutContent = `<div class="accordion-wrapper-soldout">Отсутствуют · 3 товара</div>`;
+export const soldoutContent = `<div class="accordion-wrapper-soldout">Отсутствуют · 3 товара</div>`;
 
-const template = (content, id) => {
+/**
+ * Темплайте для accordion.
+ * @param {string} content - id объекта, который будет удален
+ * @param {string} id - id триггер, который открывает или закрывает accordion
+ */
+export const template = (content, id) => {
   return `
     <div class="accordion">
       <div class="accordion-wrapper">
@@ -23,19 +28,17 @@ const template = (content, id) => {
   `;
 };
 
-// рендерим accordion
-(function render() {
-  const cart = template(cartContent, "cart");
-  document.querySelector(".cart").insertAdjacentHTML("afterend", cart);
-
-  const soldout = template(soldoutContent, "soldout");
-  document
-    .querySelector(".product__wrapper")
-    .insertAdjacentHTML("afterend", soldout);
-})();
-
-// логика открытия и закрытия accordion
-const accordion = (
+/**
+ * Логика открытия и закрытия accordion.
+ * @param {string} target - элемент, который будет скрываться
+ * @param {string} trigger - триггер, который активирует
+ * @param {string} className - модификатор класса для контента
+ * @param {string} flag - флаг проверки
+ * @param {string} classNameTrigger - модификатор класса для триггера
+ * @param {string} accordion - сам accordion
+ * @param {string} classNameAccordion - класс accordion
+ */
+export const accordion = (
   target,
   trigger,
   className,
@@ -56,30 +59,3 @@ const accordion = (
     }
   });
 };
-
-// accordion для cart
-const arrowProducts = document.querySelector("#cart");
-const products = document.querySelector(".product__wrapper");
-const accordionElement = document.querySelector(".accordion");
-
-accordion(
-  products,
-  arrowProducts,
-  "product__wrapper--hidden",
-  "product__wrapper",
-  "accordion__arrow--active",
-  accordionElement,
-  "accordion--active",
-);
-
-// accordion для soldout
-const arrowProductsSoldout = document.querySelector("#soldout");
-const productsSoldout = document.querySelector(".product__wrapper-soldout");
-
-accordion(
-  productsSoldout,
-  arrowProductsSoldout,
-  "product__wrapper-soldout--hidden",
-  "product__wrapper-soldout",
-  "accordion__arrow-soldout--active",
-);

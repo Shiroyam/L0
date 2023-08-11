@@ -1,1 +1,1 @@
-export * from "./accordion";
+export * as accordion from "./accordion";

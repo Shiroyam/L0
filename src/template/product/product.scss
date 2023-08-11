@@ -95,49 +95,6 @@
     }
   }
 
-  &__counter {
-    display: flex;
-    gap: 7.53px;
-    justify-self: end;
-
-    width: 100px;
-    height: 44px;
-    padding-left: 16px;
-
-    background-color: var(--color-white);
-    border-radius: 8px;
-
-    &-number {
-      width: 44px;
-      margin-top: 7px;
-
-      font-family: "Segoe UI", Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 24px;
-      text-align: center;
-    }
-
-    &-btn {
-      cursor: pointer;
-
-      margin-top: -7px;
-
-      font-family: "Segoe UI", Arial, sans-serif;
-      font-size: 20px;
-      font-weight: 400;
-      color: var(--color-gray);
-      letter-spacing: -0.2px;
-
-      background-color: transparent;
-      border: none;
-    }
-
-    &-btn--active {
-      color: var(--color-black);
-    }
-  }
-
   &__price {
     justify-self: end;
     text-align: end;
@@ -219,7 +176,11 @@
 }
 
 .product--soldout {
-  grid-template-columns: 88px 1fr;
+  grid-template-columns: 88px 1fr 1fr;
+
+  .counter  {
+    margin-right: 126.8px;
+  }
 
   .product__checkbox {
     display: none;

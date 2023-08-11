@@ -1,10 +1,12 @@
-import { products } from "../../data.json";
+import { counter } from "../counter";
 import "./product.scss";
 
-const template = (data) => {
+export const template = (data) => {
   return `
   <li>
-   <article class="product ${data.availability ? `` : `product--soldout`}">
+   <article id="product-${data.id}" class="product ${
+     data.availability ? `` : `product--soldout`
+   }">
   
    <div class="product__checkbox">
      <input class="product__checkbox-input" id="checkbox-${
@@ -27,15 +29,7 @@ const template = (data) => {
      </div>
    </div>
  
-   ${
-     data.availability
-       ? ` <div class="product__counter">
-             <button class="product__counter-btn">-</button>
-             <span class="product__counter-number">${data.count}</span>
-             <button class="product__counter-btn product__counter-btn--active">+</button>
-           </div>`
-       : ``
-   }
+   ${counter.template(1, data.count, data.id, data.availability)}
  
    ${
      data.availability
@@ -49,49 +43,3 @@ const template = (data) => {
   </li>
    `;
 };
-
-// рендерим карточки продукта
-(function render() {
-  products
-    .filter(({ availability }) => availability)
-    .map((data) => {
-      const element = template(data);
-
-      document
-        .querySelector(".product__wrapper")
-        .insertAdjacentHTML("beforeend", element);
-    });
-
-  products
-    .filter(({ availability }) => !availability)
-    .map((data) => {
-      const element = template(data);
-
-      document
-        .querySelector(".product__wrapper-soldout")
-        .insertAdjacentHTML("beforeend", element);
-    });
-})();
-
-// если блок .product__price-total слишком длинный, то уменьшаем font-size
-const block = document.querySelectorAll(".product__price-total");
-
-block.forEach((value) => {
-  if (value.offsetWidth > 100) {
-    value.style.fontSize = "16px";
-  }
-});
-
-// логика для выбора всех чекбоксов
-const checkboxMain = document.querySelector("#checkbox-main");
-const checkboxAll = document.querySelectorAll(".product__checkbox-input");
-
-checkboxMain.addEventListener("change", () => {
-  checkboxAll.forEach((value) => {
-    if (checkboxMain.checked) {
-      value.checked = true;
-    } else {
-      value.checked = false;
-    }
-  });
-});
