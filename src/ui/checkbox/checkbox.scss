@@ -1,0 +1,35 @@
+.checkbox {
+  position: relative;
+
+  &__input {
+    cursor: pointer;
+
+    width: 22px;
+    height: 22px;
+
+    appearance: none;
+    border: none;
+    border-radius: 5px;
+    outline: 1px solid var(--color-gray);
+
+    &:checked {
+      background-color: var(--color-secondary);
+      outline: none;
+    }
+
+    &:checked + label::before {
+      cursor: pointer;
+      content: "";
+
+      position: absolute;
+      top: 5px;
+      left: 5px;
+
+      width: 12.478px;
+      height: 10.163px;
+
+      background-image: url("../../icons/checkmark.svg");
+      background-repeat: no-repeat;
+    }
+  }
+}
