@@ -1,95 +1,82 @@
-import { products } from "./data.json";
-import { product, counter, accordion } from "./template";
+import { ROOT_MODAL } from "./constants";
+import { products, address, payment } from "./data.json";
+import {
+  deliveryModal,
+  form,
+  paymentModal,
+  product,
+  accordion,
+} from "./components";
+import { checkbox, button } from "./ui";
 
 // рендер темплейтов: accordion, products
 (function render() {
   // accordion для cart
-  const cart = accordion.template(accordion.cartContent, "cart");
-  document.querySelector(".cart").insertAdjacentHTML("afterend", cart);
-
-  // accordion для раздела soldout
-  const soldout = accordion.template(accordion.soldoutContent, "soldout");
-  document
-    .querySelector(".product__wrapper")
-    .insertAdjacentHTML("afterend", soldout);
+  accordion.render();
 
   // products в корзине
-  products
-    .filter(({ availability }) => availability)
-    .map((data) => {
-      const element = product.template(data);
-
-      document
-        .querySelector(".product__wrapper")
-        .insertAdjacentHTML("beforeend", element);
-
-      counter.onRemove(`#product-${data.id}`, `#remove-${data.id}`);
-      counter.onLike(`#like-${data.id}`);
-      counter.onIncrement(`#btn-count-${data.id}`, `#btn-increment-${data.id}`);
-      counter.onDecrement(`#btn-count-${data.id}`, `#btn-decrement-${data.id}`);
-    });
+  product.render(products);
 
   // products в soldout
-  products
-    .filter(({ availability }) => !availability)
-    .map((data) => {
-      const element = product.template(data);
+  product.renderSoldout(products);
 
-      document
-        .querySelector(".product__wrapper-soldout")
-        .insertAdjacentHTML("beforeend", element);
+  // input в form
+  form.render();
 
-      counter.onRemove(`#product-${data.id}`, `#remove-${data.id}`);
-      counter.onLike(`#like-${data.id}`);
-    });
+  //checkbox
+  document
+    .querySelector(".payment-description")
+    .insertAdjacentHTML("afterbegin", checkbox.template("payment"));
+
+  //button
+  document
+    .querySelector(".total__payment")
+    .insertAdjacentHTML("afterend", button.template("total", "Заказать"));
+
+  //modal
+  paymentModal.render(payment);
+
+  deliveryModal.render(address);
 })();
 
-// accordion для cart
-const arrowProducts = document.querySelector("#cart");
-const productsElement = document.querySelector(".product__wrapper");
-const accordionElement = document.querySelector(".accordion");
+products.forEach(({ id }) => {
+  product.crud(id);
+});
 
-accordion.accordion(
-  productsElement,
-  arrowProducts,
-  "product__wrapper--hidden",
-  "product__wrapper",
+const modalListMethod = [paymentModal, deliveryModal];
+
+modalListMethod.forEach((value) => {
+  value.closeModal();
+  value.openModal();
+  value.eventListener();
+});
+
+product.checkboxAll(products);
+product.fontResize();
+
+accordion.openAndClose(
+  ".product-wrapper",
+  "#cart",
+  "product-wrapper--hidden",
+  "product-wrapper",
   "accordion__arrow--active",
-  accordionElement,
+  "#accordion-cart",
   "accordion--active",
 );
 
-// accordion для soldout
-const arrowProductsSoldout = document.querySelector("#soldout");
-const productsSoldout = document.querySelector(".product__wrapper-soldout");
-
-accordion.accordion(
-  productsSoldout,
-  arrowProductsSoldout,
-  "product__wrapper-soldout--hidden",
-  "product__wrapper-soldout",
+accordion.openAndClose(
+  ".product-wrapper-soldout",
+  "#soldout",
+  "product-wrapper-soldout--hidden",
+  "product-wrapper-soldout",
   "accordion__arrow-soldout--active",
+  "#accordion-soldout",
+  "accordion--active",
 );
 
-// логика для выбора всех чекбоксов
-const checkboxMain = document.querySelector("#checkbox-main");
-const checkboxAll = document.querySelectorAll(".product__checkbox-input");
-
-checkboxMain.addEventListener("change", () => {
-  checkboxAll.forEach((value) => {
-    if (checkboxMain.checked) {
-      value.checked = true;
-    } else {
-      value.checked = false;
-    }
-  });
-});
-
-// если блок .product__price-total слишком длинный, то уменьшаем font-size
-const block = document.querySelectorAll(".product__price-total");
-
-block.forEach((value) => {
-  if (value.offsetWidth > 100) {
-    value.style.fontSize = "16px";
-  }
+// логика закрытия модалки при клике на бэкграунд
+ROOT_MODAL.addEventListener("click", () => {
+  ROOT_MODAL.style.display = "none";
+  document.querySelector("#modal-payment").style.display = "none";
+  document.querySelector("#modal-delivery").style.display = "none";
 });
