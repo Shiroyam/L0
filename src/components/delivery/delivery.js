@@ -1,0 +1,133 @@
+import { ROOT_MODAL } from "../../constants";
+import { modal, button, radio } from "../../ui";
+import "./delivery.scss";
+
+class DeliveryModal {
+  render(address) {
+    ROOT_MODAL.insertAdjacentHTML("beforeend", template());
+
+    address.point.forEach(({ id, address, stars }) => {
+      document
+        .querySelector("#point")
+        .insertAdjacentHTML("beforeend", point(id, address, stars));
+    });
+
+    address.courier.forEach(({ id, address }) => {
+      document
+        .querySelector("#courier")
+        .insertAdjacentHTML("beforeend", courier(id, address));
+    });
+  }
+
+  eventListener() {
+    document.querySelector("#modal-delivery").addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+
+    const pointBtn = document.querySelector("#point-btn");
+    const pointWrapper = document.querySelector("#point");
+    const courierBtn = document.querySelector("#courier-btn");
+    const courierWrapper = document.querySelector("#courier");
+
+    pointBtn.addEventListener("click", () => {
+      pointBtn.classList.add("tab--active");
+      pointWrapper.classList.add("point--active");
+
+      courierBtn.classList.remove("tab--active");
+      courierWrapper.classList.remove("courier--active");
+    });
+
+    courierBtn.addEventListener("click", () => {
+      courierBtn.classList.add("tab--active");
+      courierWrapper.classList.add("courier--active");
+
+      pointBtn.classList.remove("tab--active");
+      pointWrapper.classList.remove("point--active");
+    });
+  }
+
+  closeModal() {
+    document
+      .querySelector("#btn-close-delivery")
+      .addEventListener("click", () => {
+        ROOT_MODAL.style.display = "none";
+        document.querySelector("#modal-delivery").style.display = "none";
+      });
+  }
+
+  openModal() {
+    document.querySelectorAll("#btn-delivery").forEach((element) => {
+      element.addEventListener("click", () => {
+        ROOT_MODAL.style.display = "flex";
+        document.querySelector("#modal-delivery").style.display = "block";
+      });
+    });
+  }
+}
+
+const tabs = `
+  <button id="point-btn" class="tab tab--active">В пункт выдачи</button>
+  <button id="courier-btn" class="tab">Курьером</button>
+`;
+
+export const point = (id, address, star) => {
+  return `
+    <li class="point-wrapper">
+      ${radio.template(`point-${id}`, "point")}
+      <div>
+        <div class="text">${address}</div>
+        <div><img src="./src/icons/stars.svg"> ${star}</div>
+      </div>
+      <button class="btn">
+        <svg id="remove-${id}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+          <path class="path-svg" fill-rule="evenodd" clip-rule="evenodd" d="M2.5 5C2.5 4.72386 2.72386 4.5 3 4.5H17C17.2761 4.5 17.5 4.72386 17.5 5C17.5 5.27614 17.2761 5.5 17 5.5H3C2.72386 5.5 2.5 5.27614 2.5 5Z" />
+          <path class="path-svg" fill-rule="evenodd" clip-rule="evenodd" d="M3.4584 4.5H16.5059L15.6411 15.6926C15.5405 16.9947 14.4546 18 13.1486 18H6.84639C5.54299 18 4.45829 16.9986 4.35435 15.6994L3.4584 4.5ZM4.5416 5.5L5.35117 15.6196C5.41353 16.3992 6.06435 17 6.84639 17H13.1486C13.9322 17 14.5837 16.3968 14.6441 15.6155L15.4256 5.5H4.5416Z" />
+          <path class="path-svg" fill-rule="evenodd" clip-rule="evenodd" d="M13 5.5H7V3.46875C7 2.65758 7.65758 2 8.46875 2H11.5312C12.3424 2 13 2.65758 13 3.46875V5.5ZM8.46875 3C8.20987 3 8 3.20987 8 3.46875V4.5H12V3.46875C12 3.20987 11.7901 3 11.5312 3H8.46875Z" />
+        </svg>
+      </button>
+    </li>
+  `;
+};
+
+export const courier = (id, text) => {
+  return `
+  <li class="courier-wrapper">
+      ${radio.template(`courier-${id}`, "courier")}
+      <div class="text">${text}</div>
+      <button class="btn">
+        <svg id="remove-${id}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+          <path class="path-svg" fill-rule="evenodd" clip-rule="evenodd" d="M2.5 5C2.5 4.72386 2.72386 4.5 3 4.5H17C17.2761 4.5 17.5 4.72386 17.5 5C17.5 5.27614 17.2761 5.5 17 5.5H3C2.72386 5.5 2.5 5.27614 2.5 5Z" />
+          <path class="path-svg" fill-rule="evenodd" clip-rule="evenodd" d="M3.4584 4.5H16.5059L15.6411 15.6926C15.5405 16.9947 14.4546 18 13.1486 18H6.84639C5.54299 18 4.45829 16.9986 4.35435 15.6994L3.4584 4.5ZM4.5416 5.5L5.35117 15.6196C5.41353 16.3992 6.06435 17 6.84639 17H13.1486C13.9322 17 14.5837 16.3968 14.6441 15.6155L15.4256 5.5H4.5416Z" />
+          <path class="path-svg" fill-rule="evenodd" clip-rule="evenodd" d="M13 5.5H7V3.46875C7 2.65758 7.65758 2 8.46875 2H11.5312C12.3424 2 13 2.65758 13 3.46875V5.5ZM8.46875 3C8.20987 3 8 3.20987 8 3.46875V4.5H12V3.46875C12 3.20987 11.7901 3 11.5312 3H8.46875Z" />
+        </svg>
+      </button>
+    </li>
+  `;
+};
+
+const content = `
+   <div class="content">
+    <div class="title">
+      <h5>Способ доставки</h5> 
+      <button id="btn-close-delivery"><img src="./src/icons/close.svg"></button>
+    </div>
+    <div class="tabs">
+      ${tabs}
+    </div>
+    <ui id="courier" class="courier">
+     <h6 class="text-courier">Мои адреса</h6>
+    </ui>
+    <ui id="point" class="point point--active">
+      <h6 class="text-point">Мои адреса</h6>
+    </ui>
+    ${button.template("delivery", "Выбрать")}
+   </div>
+  `;
+
+export const template = () => {
+  return `
+    ${modal.template("delivery", content)}
+  `;
+};
+
+export const deliveryModal = new DeliveryModal();

@@ -1,0 +1,129 @@
+.content {
+  width: 100%;
+  max-width: 500px;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 13px;
+
+    h5 {
+      font-family: SegoeBold, Arial, sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      line-height: 28px;
+      letter-spacing: -0.2px;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 26px;
+
+    .tab {
+      cursor: pointer;
+
+      padding: 9px 80px 11px;
+
+      font-family: SegoeBold, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 16px;
+
+      background-color: transparent;
+      border: 2px solid rgb(203 17 171 / 15%);
+      border-radius: 24px;
+    }
+
+    .tab--active {
+      border: 2px solid var(--color-secondary);
+    }
+  }
+
+  .point {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+
+    margin-top: 12px;
+    margin-bottom: 49px;
+
+    .text-point {
+      margin-bottom: 12px;
+      font-family: SegoeBold, Arial, sans-serif;;
+      font-size: 13px;
+      line-height: 16px;
+    }
+
+    .point-wrapper {
+      display: grid;
+      grid-template-columns: 20px 1fr 20px;
+      gap: 8px;
+
+      input {
+        margin-top: 10px;
+      }
+
+      .text {
+        max-width: 400px;
+      }
+  
+      .btn {
+        cursor: pointer;
+        height: 20px;
+        background-color: transparent;
+        border: none;
+      }
+    }
+  }
+
+  .point--active {
+    display: grid;
+  }
+
+  .courier {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 49px;
+
+    .text-courier {
+      margin-bottom: 12px;
+      font-family: SegoeBold, Arial, sans-serif;;
+      font-size: 13px;
+      line-height: 16px;
+    }
+
+    .courier-wrapper {
+      display: grid;
+      grid-template-columns: 20px 1fr 20px;
+      gap: 8px;
+
+      input {
+        margin-top: 5px;
+      }
+
+      .text {
+        max-width: 400px;
+      }
+  
+      .btn {
+        cursor: pointer;
+        height: 20px;
+        background-color: transparent;
+        border: none;
+      }
+    }
+  }
+
+  .courier--active {
+    display: grid;
+  }
+}
