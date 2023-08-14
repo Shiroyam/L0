@@ -1,44 +1,11 @@
 .product {
   display: grid;
-  grid-template-columns: 34px 88px 1fr 1fr 129px;
+  grid-template-columns: 34px 88px 275px 1fr 129px;
   grid-template-rows: 1fr;
   width: 100%;
 
-  &__checkbox {
-    position: relative;
+  .checkbox {
     margin: 37.5px 0 0;
-
-    &-input {
-      cursor: pointer;
-
-      width: 22px;
-      height: 22px;
-
-      appearance: none;
-      border: none;
-      border-radius: 5px;
-      outline: 1px solid var(--color-gray);
-
-      &:checked {
-        background-color: var(--color-secondary);
-        outline: none;
-      }
-
-      &:checked + label::before {
-        cursor: pointer;
-        content: "";
-
-        position: absolute;
-        top: 5px;
-        left: 5px;
-
-        width: 12.478px;
-        height: 10.163px;
-
-        background-image: url("../../icons/checkmark.svg");
-        background-repeat: no-repeat;
-      }
-    }
   }
 
   &__img {
@@ -55,7 +22,7 @@
     &-title {
       margin-bottom: 8px;
 
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: SegoeRegular, Arial, sans-serif;
       font-size: 16px;
       font-weight: 400;
       line-height: 24px;
@@ -64,10 +31,7 @@
 
     &-description {
       margin-bottom: 8px;
-
-      font-family: "Segoe UI", Arial, sans-serif;
       font-size: 13px;
-      font-weight: 400;
       line-height: 16px;
       color: var(--color-black);
 
@@ -77,9 +41,7 @@
     }
 
     &-company {
-      font-family: "Segoe UI", Arial, sans-serif;
       font-size: 13px;
-      font-weight: 400;
       line-height: 16px;
       color: var(--color-gray);
 
@@ -100,14 +62,14 @@
     text-align: end;
 
     &-total {
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: SegoeBold, Arial, sans-serif;
       font-size: 20px;
-      font-weight: 700;
       line-height: 24px;
       color: var(--color-black);
       letter-spacing: -0.2px;
 
       span {
+        font-family: SegoeBold, Arial, sans-serif;
         font-size: 16px;
         line-height: 24px;
       }
@@ -118,9 +80,7 @@
 
       display: inline;
 
-      font-family: "Segoe UI", Arial, sans-serif;
       font-size: 13px;
-      font-weight: 400;
       font-style: normal;
       line-height: 16px;
       color: var(--color-gray);
@@ -135,8 +95,9 @@
   }
 }
 
-.product__wrapper {
+.product-wrapper {
   width: 100%;
+  min-width: 640px;
   max-width: 891px;
   margin-bottom: 40px;
   padding-top: 11px;
@@ -152,11 +113,11 @@
   }
 }
 
-.product__wrapper--hidden {
+.product-wrapper--hidden {
   display: none;
 }
 
-.product__wrapper-soldout {
+.product-wrapper-soldout {
   width: 100%;
   max-width: 891px;
   padding-top: 11px;
@@ -171,7 +132,7 @@
   }
 }
 
-.product__wrapper-soldout--hidden {
+.product-wrapper-soldout--hidden {
   display: none;
 }
 
