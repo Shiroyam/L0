@@ -2,27 +2,42 @@
   font-family: SegoeRegular;
   font-weight: normal;
   font-style: normal;
-  src: local('Segoe UI Regular'), url('../fonts/Segoe UI.woff') format('woff');
-}
-
-@font-face {
-  font-family: SegoeLight;
-  font-weight: normal;
-  font-style: normal;
-  src: local('Segoe UI Light'), url('../fonts/Segoe UI Light.woff') format('woff');
-}
-  
-@font-face {
-  font-family: SegoeSemibold;
-  font-weight: normal;
-  font-style: normal;
-  src: local('Segoe UI Semibold'), url('../fonts/Segoe UI Semibold.woff') format('woff');
+  src: url('../fonts/SEGOEUI.TTF') format('woff');
 }
 
 @font-face {
   font-family: SegoeBold;
   font-weight: normal;
   font-style: normal;
-  src: local('Segoe UI Bold'), url('../fonts/Segoe UI Bold.woff') format('woff');
+  src: url('../fonts/SEGOEUIB.TTF') format('woff');
 }
+  
+@font-face {
+  font-family: SegoeSemibold;
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/SEGUISB.TTF') format('woff');
+}
+
+@font-face {
+  font-family: SegoeLight;
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/SEGOEUIL.TTF') format('woff');
+}
+
+@font-face {
+  font-family: SegoeBlack;
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/SEGUIBL.TTF') format('woff');
+}
+
+@font-face {
+  font-family: SegoeSemilight;
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/SEGOEUISL.TTF') format('woff');
+}
+
   
