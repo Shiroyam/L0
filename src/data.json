@@ -117,23 +117,23 @@
   "payment": [
     {
       "id": "0",
-      "title": "MIR",
-      "number": "1234 5678 9012 1234"
+      "title": "mir",
+      "number": "1234 56•• •••• 1234"
     },
     {
       "id": "1",
-      "title": "VISA",
-      "number": "1234 5678 9012 1234"
+      "title": "visa",
+      "number": "1234 56•• •••• 1234"
     },
     {
       "id": "2",
-      "title": "MASTER CARD",
-      "number": "1234 5678 9012 1234"
+      "title": "mastercard",
+      "number": "1234 56•• •••• 1234"
     },
     {
       "id": "3",
-      "title": "MAESTRO",
-      "number": "1234 5678 9012 1234"
+      "title": "maestro",
+      "number": "1234 56•• •••• 1234"
     }
   ]
 }
