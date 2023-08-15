@@ -5,11 +5,11 @@ class Accordion {
   render() {
     document
       .querySelector(".cart")
-      .insertAdjacentHTML("afterend", template(cartContent, "cart"));
+      .insertAdjacentHTML("afterend", this.template(cartContent, "cart"));
 
     document
       .querySelector(".product-wrapper")
-      .insertAdjacentHTML("afterend", template(soldoutContent, "soldout"));
+      .insertAdjacentHTML("afterend", this.template(soldoutContent, "soldout"));
   }
 
   /**
@@ -51,6 +51,23 @@ class Accordion {
       }
     });
   }
+
+  /**
+   * Темплайте для accordion.
+   * @param {string} content - id объекта, который будет удален
+   * @param {string} id - id триггер, который открывает или закрывает accordion
+   */
+  template(content, id) {
+    return `
+    <div id="accordion-${id}" class="accordion">
+      <div class="accordion-wrapper">
+      ${content}
+      </div>
+    
+      <img id=${id} class="accordion__arrow" src="./src/icons/arrow.svg">
+    </div>
+  `;
+  }
 }
 
 const cartContent = `
@@ -63,22 +80,5 @@ const cartContent = `
 `;
 
 const soldoutContent = `<div class="accordion-wrapper-soldout">Отсутствуют · 3 товара</div>`;
-
-/**
- * Темплайте для accordion.
- * @param {string} content - id объекта, который будет удален
- * @param {string} id - id триггер, который открывает или закрывает accordion
- */
-const template = (content, id) => {
-  return `
-    <div id="accordion-${id}" class="accordion">
-      <div class="accordion-wrapper">
-      ${content}
-      </div>
-    
-      <img id=${id} class="accordion__arrow" src="./src/icons/arrow.svg">
-    </div>
-  `;
-};
 
 export const accordion = new Accordion();
