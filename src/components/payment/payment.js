@@ -4,7 +4,7 @@ import "./payment.scss";
 
 class PaymentModal {
   render(payment) {
-    ROOT_MODAL.insertAdjacentHTML("beforeend", template());
+    ROOT_MODAL.insertAdjacentHTML("beforeend", this.template());
 
     payment.forEach(({ id, number, title }) => {
       document
@@ -36,6 +36,21 @@ class PaymentModal {
       });
     });
   }
+
+  template() {
+    const content = `
+      <div class="payment__content">
+        <div class="title">
+          <h5>Способ оплаты</h5>
+          <button id="btn-close-payment"><img src="./src/icons/close.svg"></button>
+        </div>
+        <ul id="payment" class="payment"></ul>
+        ${button.template("payment", "Выбрать")}
+      </div>
+    `;
+
+    return `${modal.template("payment", content)}`;
+  }
 }
 
 const code = (id, text, card) => {
@@ -47,23 +62,6 @@ const code = (id, text, card) => {
       </div>
       <div class="text">${text}</div>
   </li>
-  `;
-};
-
-const content = `
-   <div class="payment__content">
-    <div class="title">
-      <h5>Способ оплаты</h5>
-      <button id="btn-close-payment"><img src="./src/icons/close.svg"></button>
-    </div>
-    <ul id="payment" class="payment"></ul>
-    ${button.template("payment", "Выбрать")}
-   </div>
-  `;
-
-const template = () => {
-  return `
-    ${modal.template("payment", content)}
   `;
 };
 

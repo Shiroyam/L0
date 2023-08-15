@@ -4,7 +4,7 @@ import "./delivery.scss";
 
 class DeliveryModal {
   render(address) {
-    ROOT_MODAL.insertAdjacentHTML("beforeend", template());
+    ROOT_MODAL.insertAdjacentHTML("beforeend", this.template());
 
     address.point.forEach(({ id, address, stars }) => {
       document
@@ -63,6 +63,29 @@ class DeliveryModal {
       });
     });
   }
+
+  template() {
+    const content = `
+      <div class="content">
+        <div class="title">
+          <h5>Способ доставки</h5> 
+          <button id="btn-close-delivery"><img src="./src/icons/close.svg"></button>
+        </div>
+        <div class="tabs">
+          ${tabs}
+        </div>
+        <ui id="courier" class="courier">
+        <h6 class="text-courier">Мои адреса</h6>
+        </ui>
+        <ui id="point" class="point point--active">
+          <h6 class="text-point">Мои адреса</h6>
+        </ui>
+        ${button.template("delivery", "Выбрать")}
+      </div>
+  `;
+
+    return `${modal.template("delivery", content)}`;
+  }
 }
 
 const tabs = `
@@ -70,7 +93,7 @@ const tabs = `
   <button id="courier-btn" class="tab">Курьером</button>
 `;
 
-export const point = (id, address, star) => {
+const point = (id, address, star) => {
   return `
     <li class="point-wrapper">
       ${radio.template(`point-${id}`, "point")}
@@ -89,7 +112,7 @@ export const point = (id, address, star) => {
   `;
 };
 
-export const courier = (id, text) => {
+const courier = (id, text) => {
   return `
   <li class="courier-wrapper">
       ${radio.template(`courier-${id}`, "courier")}
@@ -102,31 +125,6 @@ export const courier = (id, text) => {
         </svg>
       </button>
     </li>
-  `;
-};
-
-const content = `
-   <div class="content">
-    <div class="title">
-      <h5>Способ доставки</h5> 
-      <button id="btn-close-delivery"><img src="./src/icons/close.svg"></button>
-    </div>
-    <div class="tabs">
-      ${tabs}
-    </div>
-    <ui id="courier" class="courier">
-     <h6 class="text-courier">Мои адреса</h6>
-    </ui>
-    <ui id="point" class="point point--active">
-      <h6 class="text-point">Мои адреса</h6>
-    </ui>
-    ${button.template("delivery", "Выбрать")}
-   </div>
-  `;
-
-export const template = () => {
-  return `
-    ${modal.template("delivery", content)}
   `;
 };
 
