@@ -76,7 +76,7 @@ class Product {
         </div>
         <div class="product__text-company">
           <div>${data.IP}</div>
-          <div>${data.OOO} <img src="./src/icons/info.svg"></div>
+          <div>${data.OOO} <img src="/svg/info.svg"></div>
         </div>
       </div>
     

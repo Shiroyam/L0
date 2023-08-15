@@ -69,7 +69,7 @@ class DeliveryModal {
       <div class="content">
         <div class="title">
           <h5>Способ доставки</h5> 
-          <button id="btn-close-delivery"><img src="./src/icons/close.svg"></button>
+          <button id="btn-close-delivery"><img src="/svg/close.svg"></button>
         </div>
         <div class="tabs">
           ${tabs}
@@ -99,7 +99,7 @@ const point = (id, address, star) => {
       ${radio.template(`point-${id}`, "point")}
       <div>
         <div class="text">${address}</div>
-        <div><img src="./src/icons/stars.svg"> ${star}</div>
+        <div><img src="/svg/stars.svg"> ${star}</div>
       </div>
       <button class="btn">
         <svg id="remove-${id}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">

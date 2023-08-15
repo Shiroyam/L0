@@ -64,7 +64,7 @@ class Accordion {
       ${content}
       </div>
     
-      <img id=${id} class="accordion__arrow" src="./src/icons/arrow.svg">
+      <img id=${id} class="accordion__arrow" src="/svg/arrow.svg">
     </div>
   `;
   }

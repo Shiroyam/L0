@@ -42,7 +42,7 @@ class PaymentModal {
       <div class="payment__content">
         <div class="title">
           <h5>Способ оплаты</h5>
-          <button id="btn-close-payment"><img src="./src/icons/close.svg"></button>
+          <button id="btn-close-payment"><img src="/svg/close.svg"></button>
         </div>
         <ul id="payment" class="payment"></ul>
         ${button.template("payment", "Выбрать")}
@@ -58,7 +58,7 @@ const code = (id, text, card) => {
   <li class="payment-wrapper">
       ${radio.template(`payment-${id}`, "payment")}
       <div class="img">
-        <img src="./src/icons/${card}.svg">
+        <img src="/svg/${card}.svg">
       </div>
       <div class="text">${text}</div>
   </li>
