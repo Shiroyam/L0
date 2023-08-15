@@ -17,9 +17,6 @@ import { checkbox, button } from "./ui";
   // products в корзине
   product.render(products);
 
-  // products в soldout
-  product.renderSoldout(products);
-
   // input в form
   form.render();
 
