@@ -20,14 +20,22 @@ class DeliveryModal {
   }
 
   eventListener() {
-    document.querySelector("#modal-delivery").addEventListener("click", (e) => {
-      e.stopPropagation();
-    });
-
     const pointBtn = document.querySelector("#point-btn");
     const pointWrapper = document.querySelector("#point");
     const courierBtn = document.querySelector("#courier-btn");
     const courierWrapper = document.querySelector("#courier");
+    const btnOpen = document.querySelectorAll("#btn-delivery");
+    const btnClose = document.querySelector("#btn-close-delivery");
+
+    btnOpen.forEach((value) => {
+      value.addEventListener("click", () => {
+        this.openModal();
+      });
+    });
+
+    btnClose.addEventListener("click", () => {
+      this.closeModal();
+    });
 
     pointBtn.addEventListener("click", () => {
       pointBtn.classList.add("tab--active");
@@ -47,20 +55,38 @@ class DeliveryModal {
   }
 
   closeModal() {
-    document
-      .querySelector("#btn-close-delivery")
-      .addEventListener("click", () => {
-        ROOT_MODAL.style.display = "none";
-        document.querySelector("#modal-delivery").style.display = "none";
-      });
+    ROOT_MODAL.style.display = "none";
+    document.querySelector("#modal-delivery").style.display = "none";
   }
 
   openModal() {
-    document.querySelectorAll("#btn-delivery").forEach((element) => {
-      element.addEventListener("click", () => {
-        ROOT_MODAL.style.display = "flex";
-        document.querySelector("#modal-delivery").style.display = "block";
-      });
+    ROOT_MODAL.style.display = "flex";
+    document.querySelector("#modal-delivery").style.display = "block";
+  }
+
+  selectAddress(data) {
+    const addressElement = document.querySelectorAll("#address");
+    const radiosPoint = document.querySelectorAll("#radio-point");
+    const radiosCourier = document.querySelectorAll("#radio-courier");
+
+    radiosPoint.forEach((value, index) => {
+      if (value.checked) {
+        let title = data.point[index].address;
+
+        addressElement.forEach((value) => {
+          value.innerHTML = title;
+        });
+      }
+    });
+
+    radiosCourier.forEach((value, index) => {
+      if (value.checked) {
+        let title = data.courier[index].address;
+
+        addressElement.forEach((value) => {
+          value.innerHTML = title;
+        });
+      }
     });
   }
 
@@ -96,7 +122,7 @@ const tabs = `
 const point = (id, address, star) => {
   return `
     <li class="point-wrapper">
-      ${radio.template(`point-${id}`, "point")}
+      ${radio.template(`point`, "address")}
       <div>
         <div class="text">${address}</div>
         <div><img src="/svg/stars.svg"> ${star}</div>
@@ -115,7 +141,7 @@ const point = (id, address, star) => {
 const courier = (id, text) => {
   return `
   <li class="courier-wrapper">
-      ${radio.template(`courier-${id}`, "courier")}
+      ${radio.template(`courier`, "address")}
       <div class="text">${text}</div>
       <button class="btn">
         <svg id="remove-${id}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">

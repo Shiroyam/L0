@@ -65,6 +65,20 @@ products.forEach((data) => {
 
 product.fontResize();
 
+deliveryModal.eventListener();
+
+document.querySelector("#button-delivery").addEventListener("click", () => {
+  deliveryModal.selectAddress(address);
+
+  deliveryModal.closeModal();
+});
+
+document.querySelector("#modal-delivery").addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+
+document.querySelector("#radio-point").checked = true;
+
 payment.forEach((data) => {
   paymentModal.eventListener(data);
 });
