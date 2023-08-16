@@ -58,8 +58,14 @@
   }
 
   &__price {
+    overflow: hidden;
     justify-self: end;
+
+    max-width: 110px;
+
     text-align: end;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &-total {
       font-family: SegoeBold, Arial, sans-serif;
@@ -67,29 +73,41 @@
       line-height: 24px;
       color: var(--color-black);
       letter-spacing: -0.2px;
-
-      span {
-        font-family: SegoeBold, Arial, sans-serif;
-        font-size: 16px;
-        line-height: 24px;
-      }
     }
 
-    &-discount {
+    &-currency {
+      font-family: SegoeBold, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      font-style: normal;
+      line-height: 24px;
+    }
+
+    .product-discount {
       cursor: pointer;
 
       display: inline;
 
       font-size: 13px;
-      font-style: normal;
       line-height: 16px;
       color: var(--color-gray);
       text-decoration: line-through;
 
       border-bottom: 1px dashed var(--color-gray);
 
-      span {
+      .number {
+        font-size: 13px;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 16px;
         color: var(--color-gray);
+      }
+
+      .currency {
+        font-size: 13px;
+        color: var(--color-gray);
+        text-decoration: line-through;
+        border-bottom: 1px dashed var(--color-gray);
       }
     }
   }
@@ -139,7 +157,7 @@
 .product--soldout {
   grid-template-columns: 88px 1fr 1fr;
 
-  .counter  {
+  .counter {
     margin-right: 126.8px;
   }
 
@@ -169,4 +187,3 @@
     }
   }
 }
-

@@ -20,38 +20,130 @@ class Product {
       });
   }
 
-  // логика удаление и лайк
-  crud(id) {
-    counter.onRemove(`#product-${id}`, `#remove-${id}`);
-    counter.onLike(`#like-${id}`);
+  eventListener(data) {
+    const increment = document.querySelector(`#btn-increment-${data.id}`);
+    const decrement = document.querySelector(`#btn-decrement-${data.id}`);
+    const remove = document.querySelector(`#remove-${data.id}`);
+    const like = document.querySelector(`#like-${data.id}`);
+    const checkbox = document.querySelector(`#checkbox-${data.id}`);
+    const checkboxAll = document.querySelector(`#checkbox-main`);
 
-    if (document.querySelector(`#btn-count-${id}`)) {
-      counter.onIncrement(`#btn-count-${id}`, `#btn-increment-${id}`);
-      counter.onDecrement(`#btn-count-${id}`, `#btn-decrement-${id}`);
+    if (increment) {
+      increment.addEventListener("click", () => {
+        counter.onIncrement(`#btn-count-${data.id}`);
+        this.increasePriceProduct(data.id, data.price, data.discount);
+
+        if (checkbox.checked) {
+          this.calculateTotalPrice();
+        }
+      });
     }
-  }
 
-  // логика для выбора всех чекбоксов
-  checkboxAll(products) {
-    const checkboxMain = document.querySelector("#checkbox-main");
+    if (decrement) {
+      decrement.addEventListener("click", () => {
+        counter.onDecrement(`#btn-count-${data.id}`);
+        this.reducePriceProduct(data.id, data.price, data.discount);
 
-    checkboxMain.addEventListener("change", () => {
-      products
-        .filter(({ availability }) => availability)
-        .forEach(({ id }) => {
-          if (checkboxMain.checked) {
-            document.querySelector(`#checkbox-${id}`).checked = true;
-          } else {
-            document.querySelector(`#checkbox-${id}`).checked = false;
-          }
-        });
+        if (checkbox.checked) {
+          this.calculateTotalPrice();
+        }
+      });
+    }
+
+    if (checkbox) {
+      checkbox.addEventListener("change", () => {
+        this.calculateTotalPrice();
+      });
+
+      checkboxAll.addEventListener("change", () => {
+        this.selectAll(checkbox, checkboxAll.checked);
+
+        this.calculateTotalPrice();
+      });
+    }
+
+    like.addEventListener("click", () => {
+      counter.onLike(like);
+    });
+
+    remove.addEventListener("click", () => {
+      counter.onRemove(`#product-${data.id}`);
+
+      this.calculateTotalPrice();
     });
   }
 
-  // если блок .product__price-total слишком длинный, то уменьшаем font-size
+  /**
+   * Убавление цены при изменении счетчика
+   */
+  increasePriceProduct(id, price, discount) {
+    const priceProduct = document.querySelector(`#product-discount-${id}`);
+    const discountProduct = document.querySelector(`#product-price-${id}`);
+
+    priceProduct.innerHTML = Number(priceProduct.innerHTML) + Number(discount);
+    discountProduct.innerHTML =
+      Number(discountProduct.innerHTML) + Number(price);
+  }
+
+  /**
+   * Добавление цены при изменении счетчика
+   */
+  reducePriceProduct(id, price, discount) {
+    const priceProduct = document.querySelector(`#product-discount-${id}`);
+    const discountProduct = document.querySelector(`#product-price-${id}`);
+
+    if (Number(priceProduct.innerHTML) > 0) {
+      priceProduct.innerHTML =
+        Number(priceProduct.innerHTML) - Number(discount);
+
+      discountProduct.innerHTML =
+        Number(discountProduct.innerHTML) - Number(price);
+    }
+  }
+
+  /**
+   * Пересчет конечной цены при каждом изменении счетчика или чекбокса
+   */
+  calculateTotalPrice() {
+    const priceTotal = document.querySelectorAll(`#total-price`);
+    const discountTotal = document.querySelector(`#total-discount`);
+    const checkboxes = document.querySelectorAll(".checkbox-product");
+    let totalPrice = 0;
+    let totalDiscount = 0;
+
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        let id = checkbox.id.split("-").at(-1);
+
+        const priceProduct = document.querySelector(`#product-discount-${id}`);
+        totalPrice += Number(priceProduct.innerHTML);
+
+        const discountProduct = document.querySelector(`#product-price-${id}`);
+        totalDiscount +=
+          Number(discountProduct.innerHTML) - Number(priceProduct.innerHTML);
+      }
+    });
+
+    priceTotal.forEach((value) => {
+      value.innerHTML = totalPrice;
+    });
+
+    discountTotal.innerHTML = totalDiscount;
+  }
+
+  /**
+   * Выбрать все чекбоксы
+   */
+  selectAll(checkbox, checked) {
+    checked ? (checkbox.checked = true) : (checkbox.checked = false);
+  }
+
+  /**
+   * Eсли блок .product__price-total слишком длинный, то уменьшаем font-size
+   */
   fontResize() {
     document.querySelectorAll(".product__price-total").forEach((value) => {
-      if (value.offsetWidth > 100) {
+      if (value.offsetWidth > 85) {
         value.style.fontSize = "16px";
       }
     });
@@ -64,7 +156,7 @@ class Product {
         data.availability ? `` : `product--soldout`
       }">
       
-      ${data.availability ? checkbox.template(data.id) : ``}
+      ${data.availability ? checkbox.template(data.id, "checkbox-product") : ``}
     
       <img class="product__img" src=${data.img} />
     
@@ -85,8 +177,14 @@ class Product {
       ${
         data.availability
           ? `<div class="product__price">
-              <div class="product__price-total">${data.discount} <span>сом</span></div>
-              <div class="product__price-discount">${data.price} <span>сом</span></div>
+              <div>
+                <span id="product-discount-${data.id}" class="product__price-total">${data.discount}</span>
+                <span class="product__price-currency">сом</span>
+              </div>
+              <div class="product-discount">
+                <span id="product-price-${data.id}" class="number">${data.price}</span>
+                <span class="currency">сом</span>
+              </div>
             </div>`
           : ``
       }
