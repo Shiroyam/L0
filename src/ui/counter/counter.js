@@ -41,15 +41,11 @@ export const template = (number = 0, count, id, availability) => {
 /**
  * Логика удаление.
  * @param {string} targetId - id объекта, который будет удален
- * @param {string} triggerId - id объекта, по нажатию которого будет удаление
  */
-export const onRemove = (targetId, triggerId) => {
+export const onRemove = (targetId) => {
   const target = document.querySelector(targetId);
-  const trigger = document.querySelector(triggerId);
 
-  trigger.addEventListener("click", () => {
-    target.parentNode.removeChild(target);
-  });
+  target.parentNode.removeChild(target);
 };
 
 /**
@@ -57,43 +53,31 @@ export const onRemove = (targetId, triggerId) => {
  * @param {string} targetId - id объекта, который будет добавлен в желаемое
  */
 export const onLike = (targetId) => {
-  const target = document.querySelector(targetId);
-
-  target.addEventListener("click", () => {
-    if (target.classList[1] !== "counter__icons-icon--active") {
-      target.classList.add("counter__icons-icon--active");
-    } else {
-      target.classList.remove("counter__icons-icon--active");
-    }
-  });
+  if (targetId.classList[1] !== "counter__icons-icon--active") {
+    targetId.classList.add("counter__icons-icon--active");
+  } else {
+    targetId.classList.remove("counter__icons-icon--active");
+  }
 };
 
 /**
  * Инкремент числа.
  * @param {string} targetId - id объекта, для инкремента
- * @param {string} triggerId - id объекта, по нажатию которого будет происходить операция
  */
-export const onIncrement = (targetId, triggerId) => {
+export const onIncrement = (targetId) => {
   const target = document.querySelector(targetId);
-  const trigger = document.querySelector(triggerId);
 
-  trigger.addEventListener("click", () => {
-    target.innerHTML++;
-  });
+  target.innerHTML = Number(target.innerHTML) + 1;
 };
 
 /**
  * Декремент числа.
  * @param {string} targetId - id объекта, для декремента
- * @param {string} triggerId - id объекта, по нажатию которого будет происходить операция
  */
-export const onDecrement = (targetId, triggerId) => {
+export const onDecrement = (targetId) => {
   const target = document.querySelector(targetId);
-  const trigger = document.querySelector(triggerId);
 
-  trigger.addEventListener("click", () => {
-    if (target.innerHTML >= 1) {
-      target.innerHTML--;
-    }
-  });
+  if (target.innerHTML >= 1) {
+    target.innerHTML = Number(target.innerHTML) - 1;
+  }
 };

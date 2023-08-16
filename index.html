@@ -11,10 +11,7 @@
     <div id="app">
       <!-- header -->
       <header class="header">
-        <img
-          class="header__mobile-burger"
-          src="/svg/burger-mobile.svg"
-        />
+        <img class="header__mobile-burger" src="/svg/burger-mobile.svg" />
 
         <div class="header__burger">
           <div class="header__burger-container">
@@ -28,10 +25,7 @@
           <img class="header__input-svg" src="/svg/search.svg" />
         </div>
 
-        <img
-          class="header__mobile-search"
-          src="/svg/search-mobile.svg"
-        />
+        <img class="header__mobile-search" src="/svg/search-mobile.svg" />
 
         <div class="header__icon">
           <div class="header__icon-card">
@@ -138,19 +132,26 @@
           <section class="total">
             <div class="total__title">
               <h3 class="total__title-text">Итого</h3>
-              <span class="total__title-price"
-                >2 101 063 <span class="currency">com</span></span
-              >
+              <div class="total__title-price">
+                <span id="total-price">6516</span>
+                <span class="currency">сом</span>
+              </div>
             </div>
 
             <div class="total__info">
               <div class="total__info-wrapper">
-                <span class="text">203 товара</span>
-                <span class="price">2 302 048 сом</span>
+                <span id="total-products" class="text">203 товара</span>
+                <div class="price">
+                  <span id="total-price">6516</span>
+                  <span>сом</span>
+                </div>
               </div>
               <div class="total__info-wrapper">
                 <span class="text">Скидка</span>
-                <span class="price">−200 985 сом</span>
+                <div class="price">
+                 - <span id="total-discount">6985</span>
+                  <span>сом</span>
+                </div>
               </div>
               <div class="total__info-wrapper">
                 <span class="text">Доставка</span>
@@ -186,12 +187,12 @@
                 <h4>Оплата картой</h4>
                 <button id="btn-payment">
                   <img src="/svg/pen.svg" />
-                 </button>
+                </button>
               </div>
               <div class="total__payment-card">
                 <div class="img">
                   <img src="/svg/mir.svg" />
-                </div>  
+                </div>
                 <span>1234 56•• •••• 1234</span>
               </div>
               <div class="total__payment-description">
@@ -203,10 +204,7 @@
             </div>
 
             <div class="total__rules">
-              <img
-                class="total__rules-img"
-                src="/svg/checkmark-black.svg"
-              />
+              <img class="total__rules-img" src="/svg/checkmark-black.svg" />
               <span class="total__rules-text"
                 >Соглашаюсь
                 <a href="" class="border"

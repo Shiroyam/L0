@@ -36,8 +36,8 @@ import { checkbox, button } from "./ui";
   deliveryModal.render(address);
 })();
 
-products.forEach(({ id }) => {
-  product.crud(id);
+products.forEach((data) => {
+  product.eventListener(data);
 });
 
 const modalListMethod = [paymentModal, deliveryModal];
@@ -48,7 +48,6 @@ modalListMethod.forEach((value) => {
   value.eventListener();
 });
 
-product.checkboxAll(products);
 product.fontResize();
 
 accordion.openAndClose(

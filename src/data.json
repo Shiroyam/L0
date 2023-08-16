@@ -20,8 +20,8 @@
       "color": "прозрачный",
       "size": null,
       "count": 200,
-      "price": "2 300 047",
-      "discount": "2 100 047",
+      "price": "11500",
+      "discount": "5500",
       "IP": "Коледино WB",
       "OOO": "OOO Мегапрофстиль",
       "availability": true
@@ -59,8 +59,8 @@
       "color": "прозрачный",
       "size": null,
       "count": 0,
-      "price": "2 300 047",
-      "discount": "2 100 047",
+      "price": "2300047",
+      "discount": "2100047",
       "IP": "Коледино WB",
       "OOO": "OOO Мегапрофстиль",
       "availability": false
