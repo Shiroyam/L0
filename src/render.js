@@ -39,20 +39,6 @@ import { checkbox, button } from "./ui";
   deliveryModal.render(address);
 })();
 
-products.forEach((data) => {
-  product.eventListener(data);
-});
-
-const modalListMethod = [paymentModal, deliveryModal];
-
-modalListMethod.forEach((value) => {
-  value.closeModal();
-  value.openModal();
-  value.eventListener();
-});
-
-product.fontResize();
-
 accordion.openAndClose(
   ".product-wrapper",
   "#cart",
@@ -72,6 +58,28 @@ accordion.openAndClose(
   "#accordion-soldout",
   "accordion--active",
 );
+
+products.forEach((data) => {
+  product.eventListener(data);
+});
+
+product.fontResize();
+
+payment.forEach((data) => {
+  paymentModal.eventListener(data);
+});
+
+document.querySelector("#button-payment").addEventListener("click", () => {
+  paymentModal.selectCard(payment);
+
+  paymentModal.closeModal();
+});
+
+document.querySelector("#modal-payment").addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+
+document.querySelector("#radio-payment").checked = true;
 
 // логика закрытия модалки при клике на бэкграунд
 ROOT_MODAL.addEventListener("click", () => {

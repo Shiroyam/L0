@@ -14,30 +14,52 @@ class PaymentModal {
   }
 
   eventListener() {
-    document.querySelector("#modal-payment").addEventListener("click", (e) => {
-      e.stopPropagation();
+    const btnClose = document.querySelector("#btn-close-payment");
+    const btnOpen = document.querySelectorAll("#btn-payment");
+
+    btnClose.addEventListener("click", () => {
+      this.closeModal();
+    });
+
+    btnOpen.forEach((value) => {
+      value.addEventListener("click", () => {
+        this.openModal();
+      });
     });
   }
 
   closeModal() {
-    document
-      .querySelector("#btn-close-payment")
-      .addEventListener("click", () => {
-        ROOT_MODAL.style.display = "none";
-        document.querySelector("#modal-payment").style.display = "none";
-      });
+    ROOT_MODAL.style.display = "none";
+    document.querySelector("#modal-payment").style.display = "none";
   }
 
   openModal() {
-    document.querySelectorAll("#btn-payment").forEach((element) => {
-      element.addEventListener("click", () => {
-        ROOT_MODAL.style.display = "flex";
-        document.querySelector("#modal-payment").style.display = "block";
-      });
+    ROOT_MODAL.style.display = "flex";
+    document.querySelector("#modal-payment").style.display = "block";
+  }
+
+  selectCard(data) {
+    const codeElement = document.querySelectorAll("#code");
+    const codeImgElement = document.querySelectorAll("#codeImg");
+    const radios = document.querySelectorAll("#radio-payment");
+
+    radios.forEach((value, index) => {
+      if (value.checked) {
+        let number = data[index].number;
+        let title = data[index].title;
+
+        codeElement.forEach((value) => {
+          value.innerHTML = number;
+        });
+
+        codeImgElement.forEach((value) => {
+          value.src = `/svg/${title}.svg`;
+        });
+      }
     });
   }
 
-  template() {
+  template(id) {
     const content = `
       <div class="payment__content">
         <div class="title">
@@ -56,7 +78,7 @@ class PaymentModal {
 const code = (id, text, card) => {
   return `
   <li class="payment-wrapper">
-      ${radio.template(`payment-${id}`, "payment")}
+      ${radio.template(`payment`, "payment")}
       <div class="img">
         <img src="/svg/${card}.svg">
       </div>
