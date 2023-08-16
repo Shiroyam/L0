@@ -27,6 +27,7 @@ class Product {
     const like = document.querySelector(`#like-${data.id}`);
     const checkbox = document.querySelector(`#checkbox-${data.id}`);
     const checkboxAll = document.querySelector(`#checkbox-main`);
+    const checkboxPayment = document.querySelector("#checkbox-payment");
 
     if (increment) {
       increment.addEventListener("click", () => {
@@ -71,6 +72,10 @@ class Product {
 
       this.calculateTotalPrice();
     });
+
+    checkboxPayment.addEventListener("change", () => {
+      this.selectPayment();
+    });
   }
 
   /**
@@ -107,6 +112,8 @@ class Product {
   calculateTotalPrice() {
     const priceTotal = document.querySelectorAll(`#total-price`);
     const discountTotal = document.querySelector(`#total-discount`);
+    const btnTotal = document.querySelector("#button-total");
+    const checkboxTotal = document.querySelector("#checkbox-payment");
     const checkboxes = document.querySelectorAll(".checkbox-product");
     let totalPrice = 0;
     let totalDiscount = 0;
@@ -128,6 +135,10 @@ class Product {
       value.innerHTML = totalPrice;
     });
 
+    if (checkboxTotal.checked) {
+      btnTotal.innerHTML = `Оплатить ${totalPrice} cом`;
+    }
+
     discountTotal.innerHTML = totalDiscount;
   }
 
@@ -136,6 +147,18 @@ class Product {
    */
   selectAll(checkbox, checked) {
     checked ? (checkbox.checked = true) : (checkbox.checked = false);
+  }
+
+  selectPayment() {
+    const checkbox = document.querySelector("#checkbox-payment");
+    const total = document.querySelector("#total-price");
+    const btn = document.querySelector("#button-total");
+
+    if (checkbox.checked) {
+      btn.innerHTML = `Оплатить ${total.innerHTML} cом`;
+    } else {
+      btn.innerHTML = "Заказать";
+    }
   }
 
   /**

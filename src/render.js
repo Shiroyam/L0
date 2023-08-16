@@ -28,7 +28,10 @@ import { checkbox, button } from "./ui";
   //button
   document
     .querySelector(".total__payment")
-    .insertAdjacentHTML("afterend", button.template("total", "Заказать"));
+    .insertAdjacentHTML(
+      "afterend",
+      button.template("total", "Оплатить 6516 cом"),
+    );
 
   //modal
   paymentModal.render(payment);
