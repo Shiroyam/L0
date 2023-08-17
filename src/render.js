@@ -95,6 +95,8 @@ document.querySelector("#modal-payment").addEventListener("click", (e) => {
 
 document.querySelector("#radio-payment").checked = true;
 
+form.eventListener();
+
 // логика закрытия модалки при клике на бэкграунд
 ROOT_MODAL.addEventListener("click", () => {
   ROOT_MODAL.style.display = "none";

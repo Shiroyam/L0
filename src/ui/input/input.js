@@ -9,8 +9,8 @@ import "./input.scss";
  */
 export const template = (id, placeholder, value, description) => {
   return `
- <div id=${id} class="wrapper-input">
-  <input class="input" type="text" value="${value}" required="required">
+ <div id="${id}" class="wrapper-input">
+  <input id="filed-${id}" name="${id}" class="input" type="text" value="${value}" required="required">
   <label class="input-label">${placeholder}</label>
   ${description ? `<div class="description">${description}</div>` : ``}
  </div>

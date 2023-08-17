@@ -17,6 +17,15 @@
     border-left: none;
     outline: none;
   }
+  
+  .error {
+    color: var(--color-orange);
+    border-bottom: 1.5px solid var(--color-orange);
+  }
+
+  .description-error {
+    color: var(--color-orange);
+  }
 
   .description {
     margin-top: 4px;
