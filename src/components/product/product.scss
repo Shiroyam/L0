@@ -41,11 +41,12 @@
     }
 
     &-company {
+      position: relative;
       font-size: 13px;
       line-height: 16px;
       color: var(--color-gray);
 
-      div {
+      .company {
         display: flex;
         align-items: center;
 
@@ -58,7 +59,8 @@
   }
 
   &__price {
-    overflow: hidden;
+    position: relative;
+
     justify-self: end;
 
     max-width: 110px;
@@ -85,6 +87,8 @@
 
     .product-discount {
       cursor: pointer;
+
+      position: relative;
 
       display: inline;
 
@@ -184,6 +188,49 @@
 
     .product__text-company {
       display: none;
+    }
+  }
+}
+
+.tooltip__content {
+  &-title {
+    margin-bottom: 8px;
+
+    font-family: SegoeBold, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--color-black);
+  }
+
+  &-ogrn {
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--color-black);
+  }
+
+  &-address {
+    width: 100%;
+    min-width: 248px;
+
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--color-black);
+  }
+
+  &-sale {
+    display: flex;
+    gap: 15px;
+
+    .text {
+      font-size: 13px;
+      line-height: 16px;
+    }
+
+    .price {
+      font-size: 13px;
+      line-height: 16px;
+      color: var(--color-black);
     }
   }
 }

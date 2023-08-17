@@ -1,4 +1,4 @@
-import { checkbox, counter } from "../../ui";
+import { checkbox, counter, tooltip } from "../../ui";
 import "./product.scss";
 
 class Product {
@@ -28,6 +28,8 @@ class Product {
     const checkbox = document.querySelector(`#checkbox-${data.id}`);
     const checkboxAll = document.querySelector(`#checkbox-main`);
     const checkboxPayment = document.querySelector("#checkbox-payment");
+    const btnOOO = document.querySelector(`#OOO-${data.id}`);
+    const bntDiscount = document.querySelector(`#wrapper-price-${data.id}`);
 
     if (increment) {
       increment.addEventListener("click", () => {
@@ -76,6 +78,49 @@ class Product {
     checkboxPayment.addEventListener("change", () => {
       this.selectPayment();
     });
+
+    btnOOO.addEventListener("mouseover", () => {
+      btnOOO.insertAdjacentHTML(
+        "afterend",
+        tooltip.template(
+          data.id,
+          tooltipCompany(
+            data.company.title,
+            data.company.orgn,
+            data.company.address,
+          ),
+        ),
+      );
+    });
+
+    btnOOO.addEventListener("mouseout", () => {
+      const tooltip = document.querySelector(".tooltip");
+
+      tooltip.remove();
+    });
+
+    if (bntDiscount) {
+      const percent = Number(data.price) / 100;
+      const sale = Math.floor(
+        (Number(data.price) - Number(data.discount)) / percent,
+      );
+
+      bntDiscount.addEventListener("mouseover", () => {
+        bntDiscount.insertAdjacentHTML(
+          "beforeend",
+          tooltip.template(
+            data.id,
+            tooltipDiscount(sale, Number(data.price) - Number(data.discount)),
+          ),
+        );
+      });
+
+      bntDiscount.addEventListener("mouseout", () => {
+        const tooltip = document.querySelector(".tooltip");
+
+        tooltip.remove();
+      });
+    }
   }
 
   /**
@@ -191,7 +236,9 @@ class Product {
         </div>
         <div class="product__text-company">
           <div>${data.IP}</div>
-          <div>${data.OOO} <img src="/svg/info.svg"></div>
+          <div class="company">${
+            data.company.title
+          } <img src="/svg/info.svg" id="OOO-${data.id}"></div>
         </div>
       </div>
     
@@ -204,7 +251,7 @@ class Product {
                 <span id="product-discount-${data.id}" class="product__price-total">${data.discount}</span>
                 <span class="product__price-currency">сом</span>
               </div>
-              <div class="product-discount">
+              <div id="wrapper-price-${data.id}" class="product-discount">
                 <span id="product-price-${data.id}" class="number">${data.price}</span>
                 <span class="currency">сом</span>
               </div>
@@ -216,5 +263,26 @@ class Product {
     `;
   }
 }
+
+const tooltipCompany = (title, ogrn, address) => {
+  return `
+    <div class="tooltip__content">
+      <h6 class="tooltip__content-title">${title}</h6>
+      <div class="tooltip__content-ogrn">${ogrn}</div>
+      <div class="tooltip__content-address">${address}</div>
+    </div>
+  `;
+};
+
+const tooltipDiscount = (sale, price) => {
+  return `
+    <div class="tooltip__content">
+      <div class="tooltip__content-sale">
+        <div class="text">Скидка ${sale}%:</div>
+        <div class="price">- ${price} сом</div>
+      </div>
+    </div>
+  `;
+};
 
 export const product = new Product();
