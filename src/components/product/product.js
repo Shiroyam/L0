@@ -296,47 +296,53 @@ class Product {
 
   template(data) {
     return `
-      <li>
-      <article id="product-${data.id}" class="product ${
-        data.availability ? `` : `product--soldout`
-      }">
+      <li id="product-${data.id}">
+        <article class="product ${data.availability ? `` : `product--soldout`}">
+        
+        ${
+          data.availability
+            ? checkbox.template(data.id, "checkbox-product")
+            : ``
+        }
+        ${
+          data.size
+            ? `<div class="product__size-mobile">${data.size}</div>`
+            : ``
+        }
       
-      ${data.availability ? checkbox.template(data.id, "checkbox-product") : ``}
-      ${data.size ? `<div class="product__size-mobile">${data.size}</div>` : ``}
-    
-      <img class="product__img" src=${data.img} />
-    
-      <div class="product__text">
-        <h2 class="product__text-title">${data.title}</h2>
-        <div class="product__text-description">
-          ${data.color ? `<span>Цвет: ${data.color}</span>` : ``}
-          ${data.size ? `<span class="size">Размер: ${data.size}</span>` : ``}
+        <img class="product__img" src=${data.img} />
+      
+        <div class="product__text">
+          <h2 class="product__text-title">${data.title}</h2>
+          <div class="product__text-description">
+            ${data.color ? `<span>Цвет: ${data.color}</span>` : ``}
+            ${data.size ? `<span class="size">Размер: ${data.size}</span>` : ``}
+          </div>
+          <div class="product__text-company">
+            <div>${data.IP}</div>
+            <div class="company">${
+              data.company.title
+            } <img src="/svg/info.svg" id="OOO-${data.id}"></div>
+          </div>
         </div>
-        <div class="product__text-company">
-          <div>${data.IP}</div>
-          <div class="company">${
-            data.company.title
-          } <img src="/svg/info.svg" id="OOO-${data.id}"></div>
-        </div>
-      </div>
-    
-      ${counter.template(1, data.count, data.id, data.availability)}
-    
-      ${
-        data.availability
-          ? `<div class="product__price">
-              <div>
-                <span id="product-discount-${data.id}" class="product__price-total">${data.discount}</span>
-                <span class="product__price-currency">сом</span>
-              </div>
-              <div id="wrapper-price-${data.id}" class="product-discount">
-                <span id="product-price-${data.id}" class="number">${data.price}</span>
-                <span class="currency">сом</span>
-              </div>
-            </div>`
-          : ``
-      }
-      </article>
+      
+        ${counter.template(1, data.count, data.id, data.availability)}
+      
+        ${
+          data.availability
+            ? `<div class="product__price">
+                <div>
+                  <span id="product-discount-${data.id}" class="product__price-total">${data.discount}</span>
+                  <span class="product__price-currency">сом</span>
+                </div>
+                <div id="wrapper-price-${data.id}" class="product-discount">
+                  <span id="product-price-${data.id}" class="number">${data.price}</span>
+                  <span class="currency">сом</span>
+                </div>
+              </div>`
+            : ``
+        }
+        </article>
       </li>
     `;
   }
