@@ -163,7 +163,7 @@
 }
 
 .product--soldout {
-  grid-template-columns: 88px 1fr 1fr;
+  grid-template-columns: 88px 2fr 1fr;
 
   .counter {
     margin-right: 126.8px;
@@ -178,6 +178,7 @@
   }
 
   .product__text {
+    width: 100%;
     max-width: 300px;
 
     .product__text-title {
