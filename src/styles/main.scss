@@ -548,6 +548,27 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+
+    .card-count {
+      position: relative;
+
+      &::after {
+        content: "3";
+
+        position: absolute;
+        top: -5px;
+        right: -5px;
+
+        width: 16px;
+        height: 16px;
+
+        color: var(--color-white);
+        text-align: center;
+
+        background-color: var(--color-orange);
+        border-radius: 50%;
+      }
+    }
   }
 }
 
