@@ -19,13 +19,14 @@ class DeliveryModal {
     });
   }
 
-  eventListener() {
+  eventListener(address) {
     const pointBtn = document.querySelector("#point-btn");
     const pointWrapper = document.querySelector("#point");
     const courierBtn = document.querySelector("#courier-btn");
     const courierWrapper = document.querySelector("#courier");
     const btnOpen = document.querySelectorAll("#btn-delivery");
     const btnClose = document.querySelector("#btn-close-delivery");
+    const btnSelect = document.querySelector("#button-delivery");
 
     btnOpen.forEach((value) => {
       value.addEventListener("click", () => {
@@ -52,6 +53,18 @@ class DeliveryModal {
       pointBtn.classList.remove("tab--active");
       pointWrapper.classList.remove("point--active");
     });
+
+    btnSelect.addEventListener("click", () => {
+      deliveryModal.selectAddress(address);
+
+      deliveryModal.closeModal();
+    });
+
+    document.querySelector("#modal-delivery").addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+
+    document.querySelector("#radio-point").checked = true;
   }
 
   closeModal() {

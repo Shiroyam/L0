@@ -13,7 +13,9 @@ class PaymentModal {
     });
   }
 
-  eventListener() {
+  eventListener(data) {
+    const btnSelect = document.querySelector("#button-payment");
+    const modal = document.querySelector("#modal-payment");
     const btnClose = document.querySelector("#btn-close-payment");
     const btnOpen = document.querySelectorAll("#btn-payment");
 
@@ -26,6 +28,18 @@ class PaymentModal {
         this.openModal();
       });
     });
+
+    btnSelect.addEventListener("click", () => {
+      paymentModal.selectCard(data);
+
+      paymentModal.closeModal();
+    });
+
+    modal.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+
+    document.querySelector("#radio-payment").checked = true;
   }
 
   closeModal() {
