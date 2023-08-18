@@ -1,7 +1,8 @@
 .counter {
-  display: grid;
-  grid-template-rows: 44px 16px 20px;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
+  justify-self: end;
 
   &__wrapper {
     display: flex;
@@ -56,6 +57,9 @@
     display: flex;
     gap: 14px;
     justify-content: end;
+
+    width: 100%;
+    max-width: 100px;
 
     &-icon {
       cursor: pointer;

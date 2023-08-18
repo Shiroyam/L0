@@ -100,7 +100,7 @@ const configInput = [
   },
   {
     id: "input-email",
-    placeholder: "Почта",
+    placeholder: "Электронная почта",
     defaultValue: "",
     errorText: "Укажите почту",
     validateSchema: validateEmail,

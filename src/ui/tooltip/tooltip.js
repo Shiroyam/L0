@@ -4,10 +4,11 @@ import "./tooltip.scss";
  * Темплейт для тултипа.
  * @param {string | number} id
  * @param {string} content - контент внутри
+ * * @param {string} className - контент внутри
  */
-export const template = (id, content) => {
+export const template = (id, content, className) => {
   return `
-    <div id="${id}" class="tooltip">
+    <div id="${id}" class="tooltip ${className ? className : ""}">
       ${content}
     </div>
   `;

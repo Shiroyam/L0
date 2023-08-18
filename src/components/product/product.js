@@ -40,6 +40,8 @@ class Product {
           this.calculateTotalPrice();
         }
       });
+
+      this.fontResize();
     }
 
     if (decrement) {
@@ -111,6 +113,7 @@ class Product {
           tooltip.template(
             data.id,
             tooltipDiscount(sale, Number(data.price) - Number(data.discount)),
+            "price-tooltip",
           ),
         );
       });
@@ -225,6 +228,7 @@ class Product {
       }">
       
       ${data.availability ? checkbox.template(data.id, "checkbox-product") : ``}
+      ${data.size ? `<div class="product__size-mobile">${data.size}</div>` : ``}
     
       <img class="product__img" src=${data.img} />
     
@@ -232,7 +236,7 @@ class Product {
         <h2 class="product__text-title">${data.title}</h2>
         <div class="product__text-description">
           ${data.color ? `<span>Цвет: ${data.color}</span>` : ``}
-          ${data.size ? `<span>Размер: ${data.size}</span>` : ``}
+          ${data.size ? `<span class="size">Размер: ${data.size}</span>` : ``}
         </div>
         <div class="product__text-company">
           <div>${data.IP}</div>

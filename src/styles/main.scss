@@ -30,12 +30,7 @@
       }
 
       .delivery {
-        display: grid;
-        grid-template-columns: 1fr 80px;
-        gap: 16px;
-
         width: 100%;
-        max-width: 891px;
         margin-top: 37px;
         margin-bottom: 16px;
         padding: 17px 24px 24px;
@@ -44,26 +39,32 @@
         border-radius: 16px;
 
         &__title {
-          font-family: SegoeBold, Arial, sans-serif;
-          font-size: 24px;
-          line-height: 32px;
-          letter-spacing: -0.24px;
-        }
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 16px;
 
-        &__btn {
-          cursor: pointer;
+          &-text {
+            font-family: SegoeBold, Arial, sans-serif;
+            font-size: 24px;
+            line-height: 32px;
+            letter-spacing: -0.24px;
+          }
 
-          justify-self: end;
+          &-btn {
+            cursor: pointer;
 
-          width: 80px;
+            justify-self: end;
 
-          font-family: SegoeBold, Arial, sans-serif;
-          font-size: 17px;
-          line-height: 24px;
-          color: var(--color-secondary);
+            width: 80px;
 
-          background-color: transparent;
-          border: none;
+            font-family: SegoeBold, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 24px;
+            color: var(--color-secondary);
+
+            background-color: transparent;
+            border: none;
+          }
         }
 
         &__point {
@@ -125,14 +126,9 @@
             line-height: 24px;
           }
 
-          article {
+          .img {
             width: 40px;
             height: 56px;
-
-            .img {
-              width: 100%;
-              height: 100%;
-            }
           }
         }
 
@@ -187,12 +183,7 @@
       }
 
       .payment {
-        display: grid;
-        grid-template-columns: 1fr 80px;
-        gap: 16px;
-
         width: 100%;
-        max-width: 891px;
         margin-bottom: 16px;
         padding: 16px 24px 24px;
 
@@ -200,26 +191,33 @@
         border-radius: 16px;
 
         &__title {
-          font-family: SegoeBold, Arial, sans-serif;
-          font-size: 24px;
-          line-height: 32px;
-          letter-spacing: -0.24px;
-        }
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 8px;
 
-        &__btn {
-          cursor: pointer;
+          &-text {
+            font-family: SegoeBold, Arial, sans-serif;
+            font-size: 24px;
+            line-height: 32px;
+            letter-spacing: -0.24px;
+          }
 
-          justify-self: end;
+          &-btn {
+            cursor: pointer;
 
-          width: 80px;
+            justify-self: end;
 
-          font-family: SegoeBold, Arial, sans-serif;
-          font-size: 17px;
-          line-height: 24px;
-          color: var(--color-secondary);
+            width: 80px;
 
-          background-color: transparent;
-          border: none;
+            font-family: SegoeBold, Arial, sans-serif;
+            font-size: 17px;
+            line-height: 24px;
+            color: var(--color-secondary);
+
+            background-color: transparent;
+            border: none;
+          }
         }
 
         &__card {
@@ -255,9 +253,7 @@
 
       .form {
         width: 100%;
-        max-width: 891px;
         padding: 16px 24px 32px;
-
         background-color: var(--color-white);
         border-radius: 16px;
 
@@ -525,6 +521,323 @@
             cursor: pointer;
             padding-bottom: 1px;
             border-bottom: 1px solid rgb(0 0 0 / 10%);
+          }
+        }
+      }
+    }
+  }
+}
+
+.mobile-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  display: none;
+
+  width: 100%;
+  height: 56px;
+  padding: 14px 13px;
+
+  background-color: var(--color-white);
+  backdrop-filter: blur(2.5px);
+  box-shadow: 0 -0.5px 0 0 rgb(0 0 0 / 30%);
+
+  &__icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media (width <= 1130px) {
+  .wrapper {
+    .main {
+      .total {
+        max-height: 605px;
+
+        &__rules {
+          width: 100%;
+          max-width: 232px;
+        }
+      }
+    }
+  }
+}
+
+@media (width <= 1023px) {
+  .wrapper {
+    .main {
+      display: block;
+      padding: 15px 0 40px;
+
+      &__content {
+        max-width: none;
+
+        .cart {
+          margin: 0 16px 28px;
+        }
+
+        .accordion {
+          margin: 0 20px 0 16px;
+        }
+
+        .product-wrapper {
+          min-width: 100%;
+          margin-bottom: 45px;
+          padding: 11px 16px 0;
+        }
+
+        .payment {
+          padding: 16px 16px 32px;
+        }
+
+        .delivery {
+          padding: 16px 16px 32px;
+        }
+
+        .product-wrapper-soldout {
+          padding: 11px 16px 0;
+        }
+      }
+
+      .total {
+        max-width: none;
+        padding: 16px;
+        background-color: var(--color-bg);
+        box-shadow: none;
+
+        &__delivery {
+          &-price {
+            background-color: #f0ecf4;
+          }
+        }
+
+        &__payment {
+          &-description {
+            background-color: #f0ecf4;
+          }
+        }
+
+        &__rules {
+          max-width: none;
+
+          &-text {
+            max-width: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (width <= 700px) {
+  .wrapper {
+    .main {
+      padding: 10px 0 40px;
+
+      &__content {
+        .cart {
+          margin: 0 11px 13px 18px;
+          font-size: 20px;
+        }
+
+        .payment {
+          &__title {
+            &-text {
+              font-size: 20px;
+            }
+
+            &-btn {
+              font-size: 16px;
+            }
+          }
+        }
+
+        .form {
+          &__title {
+            font-size: 20px;
+          }
+
+          &__wrapper {
+            grid-template-areas:
+              "name"
+              "surname"
+              "email"
+              "telephone"
+              "INN";
+          }
+        }
+
+        .delivery {
+          &__title {
+            &-text {
+              font-size: 20px;
+            }
+
+            &-btn {
+              font-size: 16px;
+            }
+          }
+
+          &__point {
+            grid-template-areas:
+              "title"
+              "text"
+              "schedule";
+            grid-template-columns: 1fr;
+          }
+
+          &__price {
+            flex-direction: column;
+            gap: 0;
+          }
+
+          &__date {
+            flex-direction: column;
+          }
+        }
+      }
+
+      .total {
+        &__title {
+          &-text {
+            font-size: 20px;
+          }
+
+          &-price {
+            font-size: 20px;
+          }
+        }
+
+        &__delivery {
+          &-title {
+            display: none;
+          }
+
+          &-address {
+            display: none;
+          }
+
+          &-date {
+            display: none;
+          }
+        }
+
+        &__payment {
+          &-title {
+            display: none;
+          }
+
+          &-card {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    margin-bottom: 56px !important;
+  }
+
+  .mobile-bar {
+    display: block !important;
+  }
+}
+
+@media (width <= 425px) {
+  .wrapper {
+    .main {
+      padding-bottom: 24px;
+
+      &__content {
+        .delivery {
+          margin-top: 12px;
+          margin-bottom: 10px;
+          padding-bottom: 24px;
+
+          &__title {
+            margin-bottom: 6px;
+          }
+
+          &__point {
+            &-title {
+              margin-bottom: 5px;
+            }
+          }
+
+          &__price {
+            margin-bottom: 20px;
+          }
+
+          &__date {
+            margin-bottom: 20px;
+
+            .title {
+              margin-bottom: 4px;
+            }
+
+            .img {
+              margin-right: 5px;
+            }
+          }
+
+          &__description {
+            max-width: 260px;
+            margin-top: 0;
+            margin-left: 8px;
+            font-size: 13px;
+          }
+        }
+
+        .payment {
+          margin-bottom: 12px;
+          padding-bottom: 24px;
+        }
+
+        .form {
+          padding: 12px 16px 32px;
+
+          &__title {
+            margin-bottom: 20px;
+          }
+
+          &__wrapper {
+            row-gap: 33px;
+
+            .input-label {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+
+      .total {
+        padding-top: 22px;
+
+        &__title {
+          margin-bottom: 4px;
+
+          &-price {
+            span {
+              font-size: 20px;
+            }
+          }
+        }
+
+        &__info {
+          margin-bottom: 18px;
+        }
+
+        &__delivery {
+          margin-bottom: 16px;
+        }
+
+        &__payment {
+          &-description {
+            margin-bottom: 0;
           }
         }
       }
