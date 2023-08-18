@@ -71,7 +71,11 @@ class Accordion {
 }
 
 const cartContent = `
-  <div class="accordion__count">266 товаров · 2 100 569 сом</div>
+  <div class="accordion__count">
+    <span id="total-products" class="accordion__count-product">3</span> товара
+    <span>·</span>
+    <span id="total-price" class="accordion__count-price">6516</span> сом
+  </div>
   <div class="accordion__checkbox">
     ${checkbox.template("main")}
     <label for="checkbox-main"></label>

@@ -8,7 +8,7 @@ import "./tooltip.scss";
  */
 export const template = (id, content, className) => {
   return `
-    <div id="${id}" class="tooltip ${className ? className : ""}">
+    <div id="tooltip-${id}" class="tooltip ${className ? className : ""}">
       ${content}
     </div>
   `;

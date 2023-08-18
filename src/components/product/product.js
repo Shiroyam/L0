@@ -33,21 +33,27 @@ class Product {
 
     if (increment) {
       increment.addEventListener("click", () => {
-        counter.onIncrement(`#btn-count-${data.id}`);
-        this.increasePriceProduct(data.id, data.price, data.discount);
+        counter.onIncrement(data.id, data.count);
+
+        this.incrementPrise(data.id, data.price, data.discount);
+
+        this.incrementCount(data.id);
 
         if (checkbox.checked) {
           this.calculateTotalPrice();
         }
-      });
 
-      this.fontResize();
+        this.fontResize();
+      });
     }
 
     if (decrement) {
       decrement.addEventListener("click", () => {
-        counter.onDecrement(`#btn-count-${data.id}`);
-        this.reducePriceProduct(data.id, data.price, data.discount);
+        counter.onDecrement(data.id);
+
+        this.decrementCount(data.id);
+
+        this.decrementPrise(data.id, data.price, data.discount);
 
         if (checkbox.checked) {
           this.calculateTotalPrice();
@@ -81,67 +87,84 @@ class Product {
       this.selectPayment();
     });
 
-    btnOOO.addEventListener("mouseover", () => {
-      btnOOO.insertAdjacentHTML(
-        "afterend",
-        tooltip.template(
-          data.id,
-          tooltipCompany(
-            data.company.title,
-            data.company.orgn,
-            data.company.address,
-          ),
+    this.eventHoverTooltip(
+      btnOOO,
+      tooltip.template(
+        data.id,
+        tooltipCompany(
+          data.company.title,
+          data.company.orgn,
+          data.company.address,
         ),
-      );
-    });
-
-    btnOOO.addEventListener("mouseout", () => {
-      const tooltip = document.querySelector(".tooltip");
-
-      tooltip.remove();
-    });
+      ),
+      `#tooltip-${data.id}`,
+      "afterend",
+    );
 
     if (bntDiscount) {
       const percent = Number(data.price) / 100;
       const sale = Math.floor(
         (Number(data.price) - Number(data.discount)) / percent,
       );
+      const total = Number(data.price) - Number(data.discount);
 
-      bntDiscount.addEventListener("mouseover", () => {
-        bntDiscount.insertAdjacentHTML(
-          "beforeend",
-          tooltip.template(
-            data.id,
-            tooltipDiscount(sale, Number(data.price) - Number(data.discount)),
-            "price-tooltip",
-          ),
-        );
-      });
-
-      bntDiscount.addEventListener("mouseout", () => {
-        const tooltip = document.querySelector(".tooltip");
-
-        tooltip.remove();
-      });
+      this.eventHoverTooltip(
+        bntDiscount,
+        tooltip.template(
+          data.id,
+          tooltipDiscount(sale, total),
+          "price-tooltip",
+        ),
+        `#tooltip-${data.id}`,
+        "beforeend",
+      );
     }
+  }
+
+  /**
+   * Ховер для тултипа
+   */
+  eventHoverTooltip(trigger, content, id, position) {
+    trigger.addEventListener("mouseover", () => {
+      trigger.insertAdjacentHTML(position, content);
+    });
+
+    trigger.addEventListener("mouseout", () => {
+      const element = document.querySelector(id);
+
+      element.remove();
+    });
   }
 
   /**
    * Убавление цены при изменении счетчика
    */
-  increasePriceProduct(id, price, discount) {
+  incrementPrise(id, price, discount) {
     const priceProduct = document.querySelector(`#product-discount-${id}`);
     const discountProduct = document.querySelector(`#product-price-${id}`);
+    const count = document.querySelector(`#count-${id}`);
 
-    priceProduct.innerHTML = Number(priceProduct.innerHTML) + Number(discount);
-    discountProduct.innerHTML =
-      Number(discountProduct.innerHTML) + Number(price);
+    if (count) {
+      if (Number(count.innerHTML)) {
+        priceProduct.innerHTML =
+          Number(priceProduct.innerHTML) + Number(discount);
+
+        discountProduct.innerHTML =
+          Number(discountProduct.innerHTML) + Number(price);
+      }
+    } else {
+      priceProduct.innerHTML =
+        Number(priceProduct.innerHTML) + Number(discount);
+
+      discountProduct.innerHTML =
+        Number(discountProduct.innerHTML) + Number(price);
+    }
   }
 
   /**
    * Добавление цены при изменении счетчика
    */
-  reducePriceProduct(id, price, discount) {
+  decrementPrise(id, price, discount) {
     const priceProduct = document.querySelector(`#product-discount-${id}`);
     const discountProduct = document.querySelector(`#product-price-${id}`);
 
@@ -155,39 +178,87 @@ class Product {
   }
 
   /**
+   * Добавление товара при изменении счетчика
+   */
+  incrementCount(id) {
+    const countProduct = document.querySelector(`#count-${id}`);
+    const count = document.querySelectorAll(`#total-products`);
+
+    if (countProduct) {
+      if (Number(countProduct.innerHTML)) {
+        countProduct.innerHTML = Number(countProduct.innerHTML) - 1;
+
+        count.forEach((value) => {
+          value.innerHTML = Number(value.innerHTML) + 1;
+        });
+      }
+    } else {
+      count.forEach((value) => {
+        value.innerHTML = Number(value.innerHTML) + 1;
+      });
+    }
+  }
+
+  /**
+   * Убавление товара при изменении счетчика
+   */
+  decrementCount(id) {
+    const countProduct = document.querySelector(`#count-${id}`);
+    const countTotal = document.querySelectorAll(`#total-products`);
+    const priceProduct = document.querySelector(`#product-discount-${id}`);
+
+    if (countProduct) {
+      if (Number(priceProduct.innerHTML) > 0) {
+        countProduct.innerHTML = Number(countProduct.innerHTML) + 1;
+
+        countTotal.forEach((value) => {
+          value.innerHTML = Number(value.innerHTML) - 1;
+        });
+      }
+    } else if (Number(priceProduct.innerHTML) > 0) {
+      countTotal.forEach((value) => {
+        value.innerHTML = Number(value.innerHTML) - 1;
+      });
+    }
+  }
+
+  /**
    * Пересчет конечной цены при каждом изменении счетчика или чекбокса
    */
   calculateTotalPrice() {
     const priceTotal = document.querySelectorAll(`#total-price`);
     const discountTotal = document.querySelector(`#total-discount`);
-    const btnTotal = document.querySelector("#button-total");
-    const checkboxTotal = document.querySelector("#checkbox-payment");
+    const countTotal = document.querySelectorAll(`#total-products`);
     const checkboxes = document.querySelectorAll(".checkbox-product");
-    let totalPrice = 0;
-    let totalDiscount = 0;
+    let price = 0;
+    let discount = 0;
+    let count = 0;
 
     checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
         let id = checkbox.id.split("-").at(-1);
 
+        const countProduct = document.querySelector(`#btn-count-${id}`);
+        count += Number(countProduct.innerHTML);
+
         const priceProduct = document.querySelector(`#product-discount-${id}`);
-        totalPrice += Number(priceProduct.innerHTML);
+        price += Number(priceProduct.innerHTML);
 
         const discountProduct = document.querySelector(`#product-price-${id}`);
-        totalDiscount +=
+        discount +=
           Number(discountProduct.innerHTML) - Number(priceProduct.innerHTML);
       }
     });
 
     priceTotal.forEach((value) => {
-      value.innerHTML = totalPrice;
+      value.innerHTML = price;
     });
 
-    if (checkboxTotal.checked) {
-      btnTotal.innerHTML = `Оплатить ${totalPrice} cом`;
-    }
+    countTotal.forEach((value) => {
+      value.innerHTML = count;
+    });
 
-    discountTotal.innerHTML = totalDiscount;
+    discountTotal.innerHTML = discount;
   }
 
   /**
@@ -197,6 +268,9 @@ class Product {
     checked ? (checkbox.checked = true) : (checkbox.checked = false);
   }
 
+  /**
+   * Чекбокс оплаты
+   */
   selectPayment() {
     const checkbox = document.querySelector("#checkbox-payment");
     const total = document.querySelector("#total-price");

@@ -13,13 +13,13 @@ export const template = (number = 0, count, id, availability) => {
   ${
     availability
       ? ` <div class="counter__wrapper">
-            <button id="btn-decrement-${id}" class="counter__wrapper-btn">-</button>
+            <button id="btn-decrement-${id}" class="counter__wrapper-btn counter__wrapper-btn--active">-</button>
             <span id="btn-count-${id}" class="counter__wrapper-number">${number}</span>
             <button id="btn-increment-${id}"  class="counter__wrapper-btn counter__wrapper-btn--active">+</button>
           </div>
           ${
             count <= 2
-              ? `<div class="counter__count">Осталось ${count} шт.</div>`
+              ? `<div class="counter__count">Осталось <span style="color: red" id="count-${id}">${count}</span> шт.</div>`
               : ``
           }`
       : ``
@@ -64,20 +64,36 @@ export const onLike = (targetId) => {
  * Инкремент числа.
  * @param {string} targetId - id объекта, для инкремента
  */
-export const onIncrement = (targetId) => {
-  const target = document.querySelector(targetId);
+export const onIncrement = (id, max) => {
+  const target = document.querySelector(`#btn-count-${id}`);
+  const increment = document.querySelector(`#btn-increment-${id}`);
+  const decrement = document.querySelector(`#btn-decrement-${id}`);
 
-  target.innerHTML = Number(target.innerHTML) + 1;
+  if (Number(target.innerHTML) == max) {
+    increment.classList.remove("counter__wrapper-btn--active");
+  }
+
+  if (Number(target.innerHTML) <= max) {
+    decrement.classList.add("counter__wrapper-btn--active");
+    target.innerHTML = Number(target.innerHTML) + 1;
+  }
 };
 
 /**
  * Декремент числа.
  * @param {string} targetId - id объекта, для декремента
  */
-export const onDecrement = (targetId) => {
-  const target = document.querySelector(targetId);
+export const onDecrement = (id) => {
+  const target = document.querySelector(`#btn-count-${id}`);
+  const increment = document.querySelector(`#btn-increment-${id}`);
+  const decrement = document.querySelector(`#btn-decrement-${id}`);
 
   if (target.innerHTML >= 1) {
+    increment.classList.add("counter__wrapper-btn--active");
     target.innerHTML = Number(target.innerHTML) - 1;
+  }
+
+  if (target.innerHTML == 0) {
+    decrement.classList.remove("counter__wrapper-btn--active");
   }
 };
