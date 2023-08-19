@@ -39,15 +39,15 @@ class Form {
       configInput.forEach((value) => {
         const input = document.querySelector(`#filed-${value.id}`);
 
-        input.dispatchEvent(new Event("focusout"));
+        const error = value.validateSchema(input.value);
 
-        const error = document.querySelector(`#error-filed-${value.id}`);
-
-        if (error) {
+        if (!error) {
           form.scrollIntoView({
             behavior: "smooth",
             block: "start",
           });
+
+          this.triggerError(input, value.errorText);
         }
       });
     });
@@ -68,7 +68,7 @@ class Form {
     trigger.addEventListener("focusout", () => {
       const error = document.querySelector(`#error-${trigger.id}`);
 
-      if (!validation(trigger.value) && !error) {
+      if (!validation(trigger.value) && !error && trigger.value.length > 0) {
         this.triggerError(target, errorText);
       }
     });
