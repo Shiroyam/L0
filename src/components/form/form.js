@@ -41,8 +41,6 @@ class Form {
         const error = value.validateSchema(input.value);
         const errorText = document.querySelector(`#error-${input.id}`);
 
-        console.log(errorText);
-
         if (!error) {
           form.scrollIntoView({
             behavior: "smooth",
