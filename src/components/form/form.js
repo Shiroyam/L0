@@ -38,16 +38,20 @@ class Form {
     btnTotal.addEventListener("click", () => {
       configInput.forEach((value) => {
         const input = document.querySelector(`#filed-${value.id}`);
+        const error = value.validateSchema(input.value);
+        const errorText = document.querySelector(`#error-${input.id}`);
 
-        input.dispatchEvent(new Event("focusout"));
+        console.log(errorText);
 
-        const error = document.querySelector(`#error-filed-${value.id}`);
-
-        if (error) {
+        if (!error) {
           form.scrollIntoView({
             behavior: "smooth",
             block: "start",
           });
+
+          if (!errorText) {
+            this.triggerError(input, value.errorText);
+          }
         }
       });
     });
@@ -68,7 +72,7 @@ class Form {
     trigger.addEventListener("focusout", () => {
       const error = document.querySelector(`#error-${trigger.id}`);
 
-      if (!validation(trigger.value) && !error) {
+      if (!validation(trigger.value) && !error && trigger.value.length > 0) {
         this.triggerError(target, errorText);
       }
     });
