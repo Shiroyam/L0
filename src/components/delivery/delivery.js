@@ -105,7 +105,7 @@ class DeliveryModal {
 
   template() {
     const content = `
-      <div class="content">
+      <div class="delivery__content">
         <div class="title">
           <h5>Способ доставки</h5> 
           <button id="btn-close-delivery"><img src="/svg/close.svg"></button>
