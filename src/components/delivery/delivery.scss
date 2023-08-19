@@ -1,4 +1,4 @@
-.content {
+.delivery__content {
   width: 100%;
   max-width: 500px;
 
@@ -125,5 +125,45 @@
 
   .courier--active {
     display: grid;
+  }
+}
+
+@media (width <= 500px) {
+  .delivery__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+
+    .title {
+      width: 100%;
+      margin-top: 16px;
+    }
+
+    .point {
+      margin-top: 0;
+
+      .point-wrapper {
+        gap: 0;
+
+        .btn {
+          margin-top: 8px;
+        }
+      }
+    }
+
+    .tabs {
+      width: 100%;
+
+      .tab {
+        width: 100%;
+        padding: 11px 13px;
+      }
+    }
+
+    .button {
+      margin-top: auto;
+      margin-bottom: 16px;
+    }
   }
 }
