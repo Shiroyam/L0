@@ -11,14 +11,15 @@
 
     width: 100px;
     height: 44px;
-    padding-left: 16px;
+    padding-right: 4px;
+    padding-left: 12px;
 
     background-color: var(--color-white);
     border-radius: 8px;
 
     &-number {
       width: 44px;
-      margin-top: 7px;
+      margin-top: 9px;
 
       font-size: 16px;
       line-height: 24px;
@@ -78,16 +79,12 @@
   }
 }
 
-@media (width <= 514px) {
+@media (width <= 530px) {
   .counter {
     &__wrapper {
-      padding: 0 9px;
+      padding: 0 8px;
 
       &-number {
-        font-size: 14px;
-      }
-  
-      &-btn {
         font-size: 14px;
       }
     }

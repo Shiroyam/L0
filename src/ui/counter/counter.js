@@ -13,7 +13,7 @@ export const template = (number = 0, count, id, availability) => {
   ${
     availability
       ? ` <div class="counter__wrapper">
-            <button id="btn-decrement-${id}" class="counter__wrapper-btn counter__wrapper-btn--active">-</button>
+            <button id="btn-decrement-${id}" class="counter__wrapper-btn counter__wrapper-btn--active">−</button>
             <span id="btn-count-${id}" class="counter__wrapper-number">${number}</span>
             <button id="btn-increment-${id}"  class="counter__wrapper-btn counter__wrapper-btn--active">+</button>
           </div>

@@ -363,7 +363,7 @@ const tooltipDiscount = (sale, price) => {
     <div class="tooltip__content">
       <div class="tooltip__content-sale">
         <div class="text">Скидка ${sale}%:</div>
-        <div class="price">- ${price} сом</div>
+        <div class="price">− ${price} сом</div>
       </div>
     </div>
   `;
