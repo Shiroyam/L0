@@ -107,12 +107,13 @@ class Product {
         (Number(data.price) - Number(data.discount)) / percent,
       );
       const total = Number(data.price) - Number(data.discount);
+      const extraDiscount = Math.floor(percent * 10);
 
       this.eventHoverTooltip(
         bntDiscount,
         tooltip.template(
           data.id,
-          tooltipDiscount(sale, total),
+          tooltipDiscount(sale, total, extraDiscount),
           "price-tooltip",
         ),
         `#tooltip-${data.id}`,
@@ -358,12 +359,18 @@ const tooltipCompany = (title, ogrn, address) => {
   `;
 };
 
-const tooltipDiscount = (sale, price) => {
+const tooltipDiscount = (sale, price, discount) => {
   return `
     <div class="tooltip__content">
       <div class="tooltip__content-sale">
-        <div class="text">Скидка ${sale}%:</div>
-        <div class="price">− ${price} сом</div>
+        <div class="content">
+          <div class="text">Скидка ${sale}%</div>
+          <div class="price">− ${price} сом</div>
+        </div>
+        <div class="content">
+          <div class="text">Скидка покупателя 10%</div>
+          <div class="price">− ${discount} сом</div>
+        </div>
       </div>
     </div>
   `;

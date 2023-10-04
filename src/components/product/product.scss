@@ -122,8 +122,8 @@
 }
 
 .price-tooltip {
-  top: 40px;
-  right: -15px;
+  top: 24px;
+  right: -10px;
 }
 
 .product-wrapper {
@@ -226,18 +226,27 @@
   }
 
   &-sale {
-    display: flex;
-    gap: 15px;
+    width: 230px;
 
-    .text {
-      font-size: 13px;
-      line-height: 16px;
-    }
+    .content {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
 
-    .price {
-      font-size: 13px;
-      line-height: 16px;
-      color: var(--color-black);
+      .text {
+        font-size: 13px;
+        line-height: 16px;
+      }
+  
+      .price {
+        font-size: 13px;
+        line-height: 16px;
+        color: var(--color-black);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -441,5 +450,9 @@
         }
       }                     
     }
+  }
+
+  .price-tooltip {
+    right: -70px;
   }
 }
