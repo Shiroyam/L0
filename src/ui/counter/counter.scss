@@ -77,3 +77,19 @@
     }
   }
 }
+
+@media (width <= 514px) {
+  .counter {
+    &__wrapper {
+      padding: 0 9px;
+
+      &-number {
+        font-size: 14px;
+      }
+  
+      &-btn {
+        font-size: 14px;
+      }
+    }
+  }
+}
