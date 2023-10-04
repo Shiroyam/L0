@@ -3,7 +3,11 @@
     {
       "id": "0",
       "title": "Футболка UZcotton мужская",
-      "img": "/png/1-product.png",
+      "img": [
+        "/png/1-product.png",
+        "/png/1-mobile-product.png",
+        "/png/1-bit-product.png"
+      ],
       "color": "белый",
       "size": "56",
       "count": 1,
@@ -20,7 +24,11 @@
     {
       "id": "1",
       "title": "Силиконовый чехол картхолдер (отверстия) для карт, прозрачный кейс бампер на Apple iPhone XR, MobiSafe",
-      "img": "/png/2-product.png",
+      "img": [
+        "/png/2-product.png",
+        "/png/2-mobile-product.png",
+        "/png/2-bit-product.png"
+      ],
       "color": "прозрачный",
       "size": null,
       "count": 200,
@@ -37,7 +45,11 @@
     {
       "id": "2",
       "title": "Карандаши цветные Faber-Castell \"Замок\", набор 24 цвета, заточенные, шестигранные, Faber-Castell ",
-      "img": "/png/3-product.png",
+      "img": [
+        "/png/3-product.png",
+        "/png/3-mobile-product.png",
+        "/png/3-bit-product.png"
+      ],
       "color": null,
       "size": null,
       "count": 2,
@@ -54,7 +66,11 @@
     {
       "id": "3",
       "title": "Футболка UZcotton мужская",
-      "img": "/png/1-product.png",
+      "img": [
+        "/png/1-product.png",
+        "/png/1-mobile-product.png",
+        "/png/1-bit-product.png"
+      ],
       "color": "белый",
       "size": "56",
       "count": 2,
@@ -71,7 +87,11 @@
     {
       "id": "4",
       "title": "Силиконовый чехол картхолдер (отверстия) для карт, прозрачный кейс бампер на Apple iPhone XR, MobiSafe",
-      "img": "/png/2-product.png",
+      "img": [
+        "/png/2-product.png",
+        "/png/2-mobile-product.png",
+        "/png/2-bit-product.png"
+      ],
       "color": "прозрачный",
       "size": null,
       "count": 0,
@@ -88,7 +108,11 @@
     {
       "id": "5",
       "title": "Карандаши цветные Faber-Castell \"Замок\", набор 24 цвета, заточенные, шестигранные,Faber-Castell ",
-      "img": "/png/3-product.png",
+      "img": [
+        "/png/3-product.png",
+        "/png/3-mobile-product.png",
+        "/png/3-bit-product.png"
+      ],
       "color": null,
       "size": null,
       "count": 0,

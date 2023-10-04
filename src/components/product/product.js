@@ -309,8 +309,8 @@ class Product {
             ? `<div class="product__size-mobile">${data.size}</div>`
             : ``
         }
-      
-        <img class="product__img" src=${data.img} />
+        
+        <img class="product__img" src=${data.img[1]} srcset="${data.img[0]}" />
       
         <div class="product__text">
           <h2 class="product__text-title">${data.title}</h2>
