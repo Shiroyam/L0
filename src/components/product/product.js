@@ -44,32 +44,37 @@ class Product {
         }
 
         this.fontResize();
+        this.checkVisibilityCount();
       });
     }
 
     if (decrement) {
       decrement.addEventListener("click", () => {
-        counter.onDecrement(data.id);
-
         this.decrementCount(data.id);
 
         this.decrementPrise(data.id, data.price, data.discount);
 
+        counter.onDecrement(data.id);
+
         if (checkbox.checked) {
           this.calculateTotalPrice();
         }
+
+        this.checkVisibilityCount();
       });
     }
 
     if (checkbox) {
       checkbox.addEventListener("change", () => {
         this.calculateTotalPrice();
+        this.checkVisibilityCount();
       });
 
       checkboxAll.addEventListener("change", () => {
         this.selectAll(checkbox, checkboxAll.checked);
 
         this.calculateTotalPrice();
+        this.checkVisibilityCount();
       });
     }
 
@@ -81,6 +86,7 @@ class Product {
       counter.onRemove(`#product-${data.id}`);
 
       this.calculateTotalPrice();
+      this.checkVisibilityCount();
     });
 
     checkboxPayment.addEventListener("change", () => {
@@ -143,6 +149,7 @@ class Product {
   incrementPrise(id, price, discount) {
     const priceProduct = document.querySelector(`#product-discount-${id}`);
     const discountProduct = document.querySelector(`#product-price-${id}`);
+
     const count = document.querySelector(`#count-${id}`);
 
     if (count) {
@@ -168,8 +175,9 @@ class Product {
   decrementPrise(id, price, discount) {
     const priceProduct = document.querySelector(`#product-discount-${id}`);
     const discountProduct = document.querySelector(`#product-price-${id}`);
+    const countItem = document.querySelector(`#btn-count-${id}`);
 
-    if (Number(priceProduct.innerHTML) > 0) {
+    if (Number(countItem.innerHTML) > 1) {
       priceProduct.innerHTML =
         Number(priceProduct.innerHTML) - Number(discount);
 
@@ -183,6 +191,7 @@ class Product {
    */
   incrementCount(id) {
     const countProduct = document.querySelector(`#count-${id}`);
+    const countHeader = document.querySelector(`#header-count`);
     const count = document.querySelectorAll(`#total-products`);
     const checkbox = document.querySelector(`#checkbox-${id}`);
 
@@ -191,12 +200,16 @@ class Product {
         countProduct.innerHTML = Number(countProduct.innerHTML) - 1;
 
         if (checkbox.checked) {
+          countHeader.innerHTML = Number(countHeader.innerHTML) + 1;
+
           count.forEach((value) => {
             value.innerHTML = Number(value.innerHTML) + 1;
           });
         }
       }
     } else if (checkbox.checked) {
+      countHeader.innerHTML = Number(countHeader.innerHTML) + 1;
+
       count.forEach((value) => {
         value.innerHTML = Number(value.innerHTML) + 1;
       });
@@ -209,20 +222,25 @@ class Product {
   decrementCount(id) {
     const countProduct = document.querySelector(`#count-${id}`);
     const countTotal = document.querySelectorAll(`#total-products`);
-    const priceProduct = document.querySelector(`#product-discount-${id}`);
+    const countHeader = document.querySelector(`#header-count`);
+    const countItem = document.querySelector(`#btn-count-${id}`);
     const checkbox = document.querySelector(`#checkbox-${id}`);
 
     if (countProduct) {
-      if (Number(priceProduct.innerHTML) > 0) {
+      if (Number(countItem.innerHTML) > 1) {
         countProduct.innerHTML = Number(countProduct.innerHTML) + 1;
 
         if (checkbox.checked) {
+          countHeader.innerHTML = Number(countHeader.innerHTML) - 1;
+
           countTotal.forEach((value) => {
             value.innerHTML = Number(value.innerHTML) - 1;
           });
         }
       }
-    } else if (Number(priceProduct.innerHTML) > 0 && checkbox.checked) {
+    } else if (Number(countItem.innerHTML) > 1 && checkbox.checked) {
+      countHeader.innerHTML = Number(countHeader.innerHTML) - 1;
+
       countTotal.forEach((value) => {
         value.innerHTML = Number(value.innerHTML) - 1;
       });
@@ -236,6 +254,7 @@ class Product {
     const priceTotal = document.querySelectorAll(`#total-price`);
     const discountTotal = document.querySelector(`#total-discount`);
     const countTotal = document.querySelectorAll(`#total-products`);
+    const countHeader = document.querySelectorAll(`#header-count`);
     const checkboxes = document.querySelectorAll(".checkbox-product");
     let price = 0;
     let discount = 0;
@@ -262,6 +281,10 @@ class Product {
     });
 
     countTotal.forEach((value) => {
+      value.innerHTML = count;
+    });
+
+    countHeader.forEach((value) => {
       value.innerHTML = count;
     });
 
@@ -297,6 +320,21 @@ class Product {
     document.querySelectorAll(".product__price-total").forEach((value) => {
       if (value.offsetWidth > 85) {
         value.style.fontSize = "16px";
+      }
+    });
+  }
+
+  /**
+   * Проверка на количество товаров
+   */
+  checkVisibilityCount() {
+    const countHeader = document.querySelectorAll(`#header-count`);
+
+    countHeader.forEach((value) => {
+      if (value.innerHTML == 0) {
+        value.classList.add("header__icon-hidden");
+      } else {
+        value.classList.remove("header__icon-hidden");
       }
     });
   }

@@ -13,7 +13,7 @@ export const template = (number = 0, count, id, availability) => {
   ${
     availability
       ? ` <div class="counter__wrapper">
-            <button id="btn-decrement-${id}" class="counter__wrapper-btn counter__wrapper-btn--active">−</button>
+            <button id="btn-decrement-${id}" class="counter__wrapper-btn">−</button>
             <span id="btn-count-${id}" class="counter__wrapper-number">${number}</span>
             <button id="btn-increment-${id}"  class="counter__wrapper-btn counter__wrapper-btn--active">+</button>
           </div>
@@ -88,12 +88,12 @@ export const onDecrement = (id) => {
   const increment = document.querySelector(`#btn-increment-${id}`);
   const decrement = document.querySelector(`#btn-decrement-${id}`);
 
-  if (target.innerHTML >= 1) {
+  if (target.innerHTML > 1) {
     increment.classList.add("counter__wrapper-btn--active");
     target.innerHTML = Number(target.innerHTML) - 1;
   }
 
-  if (target.innerHTML == 0) {
+  if (target.innerHTML == 1) {
     decrement.classList.remove("counter__wrapper-btn--active");
   }
 };

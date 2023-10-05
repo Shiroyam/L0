@@ -87,6 +87,8 @@
     &-card {
       cursor: pointer;
 
+      position: relative;
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -99,25 +101,23 @@
       line-height: 16px;
     }
 
-    &-card--count {
-      position: relative;
+    &-count {
+      position: absolute;
+      top: -5px;
+      right: 3px;
 
-      &::after {
-        content: "3";
+      min-width: 16px;
+      height: 16px;
 
-        position: absolute;
-        top: -5px;
-        right: 3px;
+      color: var(--color-white);
+      text-align: center;
 
-        width: 16px;
-        height: 16px;
+      background-color: var(--color-orange);
+      border-radius: 50%;
+    }
 
-        color: var(--color-white);
-        text-align: center;
-
-        background-color: var(--color-orange);
-        border-radius: 50%;
-      }
+    &-hidden {
+      display: none;
     }
   }
 }
