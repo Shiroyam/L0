@@ -184,16 +184,19 @@ class Product {
   incrementCount(id) {
     const countProduct = document.querySelector(`#count-${id}`);
     const count = document.querySelectorAll(`#total-products`);
+    const checkbox = document.querySelector(`#checkbox-${id}`);
 
     if (countProduct) {
       if (Number(countProduct.innerHTML)) {
         countProduct.innerHTML = Number(countProduct.innerHTML) - 1;
 
-        count.forEach((value) => {
-          value.innerHTML = Number(value.innerHTML) + 1;
-        });
+        if (checkbox.checked) {
+          count.forEach((value) => {
+            value.innerHTML = Number(value.innerHTML) + 1;
+          });
+        }
       }
-    } else {
+    } else if (checkbox.checked) {
       count.forEach((value) => {
         value.innerHTML = Number(value.innerHTML) + 1;
       });
@@ -207,16 +210,19 @@ class Product {
     const countProduct = document.querySelector(`#count-${id}`);
     const countTotal = document.querySelectorAll(`#total-products`);
     const priceProduct = document.querySelector(`#product-discount-${id}`);
+    const checkbox = document.querySelector(`#checkbox-${id}`);
 
     if (countProduct) {
       if (Number(priceProduct.innerHTML) > 0) {
         countProduct.innerHTML = Number(countProduct.innerHTML) + 1;
 
-        countTotal.forEach((value) => {
-          value.innerHTML = Number(value.innerHTML) - 1;
-        });
+        if (checkbox.checked) {
+          countTotal.forEach((value) => {
+            value.innerHTML = Number(value.innerHTML) - 1;
+          });
+        }
       }
-    } else if (Number(priceProduct.innerHTML) > 0) {
+    } else if (Number(priceProduct.innerHTML) > 0 && checkbox.checked) {
       countTotal.forEach((value) => {
         value.innerHTML = Number(value.innerHTML) - 1;
       });
