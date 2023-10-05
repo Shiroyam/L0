@@ -126,9 +126,35 @@
             line-height: 24px;
           }
 
-          .img {
-            width: 40px;
-            height: 56px;
+          #delivery__product {
+            display: flex;
+            gap: 8px;
+
+            div {
+              position: relative;
+
+              .delivery__icon-count {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+        
+                min-width: 16px;
+                height: 16px;
+
+                font-size: 13px;
+                line-height: 14px;
+                color: var(--color-white);
+                text-align: center;
+        
+                background-color: var(--color-orange);
+                border-radius: 50%;
+              }
+
+              .img {
+                width: 40px;
+                height: 56px;
+              }
+            }
           }
         }
 
@@ -376,6 +402,7 @@
           color: var(--color-secondary);
 
           border-bottom: 1px dashed rgb(203 17 171 / 20%);
+
         }
 
         &-price {
@@ -558,6 +585,7 @@
         min-width: 16px;
         height: 16px;
 
+        font-size: 13px;
         line-height: 14px;
         color: var(--color-white);
         text-align: center;

@@ -18,6 +18,17 @@ class Product {
           .querySelector(".product-wrapper-soldout")
           .insertAdjacentHTML("beforeend", this.template(data));
       });
+
+    products
+      .filter(({ availability }) => availability)
+      .map((data) => {
+        document
+          .querySelector("#delivery__product")
+          .insertAdjacentHTML(
+            "beforeend",
+            this.deliveryTemplate(data.img[2], data.id),
+          );
+      });
   }
 
   eventListener(data) {
@@ -30,6 +41,12 @@ class Product {
     const checkboxPayment = document.querySelector("#checkbox-payment");
     const btnOOO = document.querySelector(`#OOO-${data.id}`);
     const bntDiscount = document.querySelector(`#wrapper-price-${data.id}`);
+    const deliveryProduct = document.querySelector(
+      `#delivery-product-${data.id}`,
+    );
+    const countHeader = document.querySelectorAll("#header-count");
+    const countImg = document.querySelector(`#delivery-count-${data.id}`);
+    const countProduct = document.querySelector(`#btn-count-${data.id}`);
 
     if (increment) {
       increment.addEventListener("click", () => {
@@ -45,7 +62,7 @@ class Product {
 
         this.selectPayment();
         this.fontResize();
-        this.checkVisibilityCount();
+        countImg.innerHTML = countProduct.innerHTML;
       });
     }
 
@@ -62,7 +79,7 @@ class Product {
         }
 
         this.selectPayment();
-        this.checkVisibilityCount();
+        countImg.innerHTML = countProduct.innerHTML;
       });
     }
 
@@ -70,7 +87,6 @@ class Product {
       checkbox.addEventListener("change", () => {
         this.calculateTotalPrice();
         this.selectPayment();
-        this.checkVisibilityCount();
       });
 
       checkboxAll.addEventListener("change", () => {
@@ -78,7 +94,6 @@ class Product {
 
         this.calculateTotalPrice();
         this.selectPayment();
-        this.checkVisibilityCount();
       });
     }
 
@@ -89,9 +104,15 @@ class Product {
     remove.addEventListener("click", () => {
       counter.onRemove(`#product-${data.id}`);
 
+      deliveryProduct.remove();
+
+      countHeader.forEach((value) => {
+        value.innerHTML = Number(value.innerHTML) - 1;
+      });
+
       this.calculateTotalPrice();
-      this.selectPayment();
       this.checkVisibilityCount();
+      this.selectPayment();
     });
 
     checkboxPayment.addEventListener("change", () => {
@@ -154,7 +175,6 @@ class Product {
   incrementPrise(id, price, discount) {
     const priceProduct = document.querySelector(`#product-discount-${id}`);
     const discountProduct = document.querySelector(`#product-price-${id}`);
-
     const count = document.querySelector(`#count-${id}`);
 
     if (count) {
@@ -196,7 +216,6 @@ class Product {
    */
   incrementCount(id) {
     const countProduct = document.querySelector(`#count-${id}`);
-    const countHeader = document.querySelector(`#header-count`);
     const count = document.querySelectorAll(`#total-products`);
     const checkbox = document.querySelector(`#checkbox-${id}`);
 
@@ -205,16 +224,12 @@ class Product {
         countProduct.innerHTML = Number(countProduct.innerHTML) - 1;
 
         if (checkbox.checked) {
-          countHeader.innerHTML = Number(countHeader.innerHTML) + 1;
-
           count.forEach((value) => {
             value.innerHTML = Number(value.innerHTML) + 1;
           });
         }
       }
     } else if (checkbox.checked) {
-      countHeader.innerHTML = Number(countHeader.innerHTML) + 1;
-
       count.forEach((value) => {
         value.innerHTML = Number(value.innerHTML) + 1;
       });
@@ -227,7 +242,6 @@ class Product {
   decrementCount(id) {
     const countProduct = document.querySelector(`#count-${id}`);
     const countTotal = document.querySelectorAll(`#total-products`);
-    const countHeader = document.querySelector(`#header-count`);
     const countItem = document.querySelector(`#btn-count-${id}`);
     const checkbox = document.querySelector(`#checkbox-${id}`);
 
@@ -236,16 +250,12 @@ class Product {
         countProduct.innerHTML = Number(countProduct.innerHTML) + 1;
 
         if (checkbox.checked) {
-          countHeader.innerHTML = Number(countHeader.innerHTML) - 1;
-
           countTotal.forEach((value) => {
             value.innerHTML = Number(value.innerHTML) - 1;
           });
         }
       }
     } else if (Number(countItem.innerHTML) > 1 && checkbox.checked) {
-      countHeader.innerHTML = Number(countHeader.innerHTML) - 1;
-
       countTotal.forEach((value) => {
         value.innerHTML = Number(value.innerHTML) - 1;
       });
@@ -259,7 +269,6 @@ class Product {
     const priceTotal = document.querySelectorAll(`#total-price`);
     const discountTotal = document.querySelector(`#total-discount`);
     const countTotal = document.querySelectorAll(`#total-products`);
-    const countHeader = document.querySelectorAll(`#header-count`);
     const checkboxes = document.querySelectorAll(".checkbox-product");
     let price = 0;
     let discount = 0;
@@ -286,10 +295,6 @@ class Product {
     });
 
     countTotal.forEach((value) => {
-      value.innerHTML = count;
-    });
-
-    countHeader.forEach((value) => {
       value.innerHTML = count;
     });
 
@@ -395,6 +400,13 @@ class Product {
         </article>
       </li>
     `;
+  }
+
+  deliveryTemplate(img, id) {
+    return `<div id="delivery-product-${id}">
+      <img class="img" src="${img}" />
+      <div id="delivery-count-${id}" class="delivery__icon-count">1</div>
+    </div>`;
   }
 }
 

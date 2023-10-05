@@ -113,6 +113,8 @@ class DeliveryModal {
     const radiosCourier = document.querySelectorAll("#radio-courier");
     const star = document.querySelector("#star-number");
     const scheduler = document.querySelector(".delivery__point-schedule");
+    const titleDelivery = document.querySelector("#title-delivery");
+    const titleTotal = document.querySelector("#title-total");
 
     radiosPoint.forEach((value, index) => {
       if (value.checked) {
@@ -125,6 +127,8 @@ class DeliveryModal {
 
         star.innerHTML = stars;
         scheduler.style.display = "block";
+        titleDelivery.innerHTML = "Пункт выдачи";
+        titleTotal.innerHTML = "Доставка в пункт выдачи";
       }
     });
 
@@ -137,6 +141,8 @@ class DeliveryModal {
         });
 
         scheduler.style.display = "none";
+        titleDelivery.innerHTML = "Курьером";
+        titleTotal.innerHTML = "Доставка курьером";
       }
     });
   }
