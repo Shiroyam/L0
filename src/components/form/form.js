@@ -18,12 +18,14 @@ class Form {
             value.placeholder,
             value.defaultValue,
             value.description,
+            value.type,
           ),
         );
     });
   }
 
   eventListener() {
+    const telephoneInput = document.querySelector("#filed-input-telephone");
     const btnTotal = document.querySelector("#button-total");
     const form = document.querySelector(".form");
 
@@ -33,6 +35,10 @@ class Form {
       this.eventChange(input, input, value.validateSchema);
 
       this.eventFocusOut(input, input, value.validateSchema, value.errorText);
+    });
+
+    telephoneInput.addEventListener("input", () => {
+      telephoneInput.value = telephoneInput.value.replace(/[^\d\s()+-]/g, "");
     });
 
     btnTotal.addEventListener("click", () => {
@@ -92,6 +98,7 @@ const configInput = [
     defaultValue: "",
     errorText: "Укажите имя",
     validateSchema: validateDefaultField,
+    type: "text",
   },
   {
     id: "input-surname",
@@ -99,6 +106,7 @@ const configInput = [
     defaultValue: "",
     errorText: "Укажите фамилию",
     validateSchema: validateDefaultField,
+    type: "text",
   },
   {
     id: "input-email",
@@ -106,6 +114,7 @@ const configInput = [
     defaultValue: "",
     errorText: "Укажите почту",
     validateSchema: validateEmail,
+    type: "text",
   },
   {
     id: "input-telephone",
@@ -113,6 +122,7 @@ const configInput = [
     defaultValue: "+7 988 123-45-67",
     errorText: "Укажите телефон",
     validateSchema: validateTelephone,
+    type: "text",
   },
   {
     id: "input-INN",
@@ -121,6 +131,7 @@ const configInput = [
     errorText: "Укажите ИНН",
     description: "Для таможенного оформления",
     validateSchema: validateINN,
+    type: "number",
   },
 ];
 
