@@ -27,6 +27,8 @@
     margin-bottom: 139px;
 
     &-wrapper {
+      cursor: pointer;
+
       display: grid;
       grid-template-columns: 20px 30px 1fr;
       gap: 8px;

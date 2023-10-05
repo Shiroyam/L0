@@ -43,6 +43,7 @@ class Product {
           this.calculateTotalPrice();
         }
 
+        this.selectPayment();
         this.fontResize();
         this.checkVisibilityCount();
       });
@@ -60,6 +61,7 @@ class Product {
           this.calculateTotalPrice();
         }
 
+        this.selectPayment();
         this.checkVisibilityCount();
       });
     }
@@ -67,6 +69,7 @@ class Product {
     if (checkbox) {
       checkbox.addEventListener("change", () => {
         this.calculateTotalPrice();
+        this.selectPayment();
         this.checkVisibilityCount();
       });
 
@@ -74,6 +77,7 @@ class Product {
         this.selectAll(checkbox, checkboxAll.checked);
 
         this.calculateTotalPrice();
+        this.selectPayment();
         this.checkVisibilityCount();
       });
     }
@@ -86,6 +90,7 @@ class Product {
       counter.onRemove(`#product-${data.id}`);
 
       this.calculateTotalPrice();
+      this.selectPayment();
       this.checkVisibilityCount();
     });
 

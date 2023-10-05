@@ -18,6 +18,7 @@ class PaymentModal {
     const modal = document.querySelector("#modal-payment");
     const btnClose = document.querySelector("#btn-close-payment");
     const btnOpen = document.querySelectorAll("#btn-payment");
+    const payment = document.querySelectorAll(".payment-wrapper");
 
     btnClose.addEventListener("click", () => {
       this.closeModal();
@@ -37,6 +38,12 @@ class PaymentModal {
 
     modal.addEventListener("click", (e) => {
       e.stopPropagation();
+    });
+
+    payment.forEach((value) => {
+      value.addEventListener("click", () => {
+        value.childNodes[1].checked = true;
+      });
     });
 
     document.querySelector("#radio-payment").checked = true;

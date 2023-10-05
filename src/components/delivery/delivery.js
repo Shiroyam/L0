@@ -27,6 +27,24 @@ class DeliveryModal {
     const btnOpen = document.querySelectorAll("#btn-delivery");
     const btnClose = document.querySelector("#btn-close-delivery");
     const btnSelect = document.querySelector("#button-delivery");
+    const btnRemove = document.querySelectorAll(".btn");
+    const point = document.querySelectorAll(".point-wrapper");
+    const courier = document.querySelectorAll(".courier-wrapper");
+    const addressElement = document.querySelectorAll("#address");
+    const scheduler = document.querySelector(".delivery__point-schedule");
+
+    btnRemove.forEach((value) => {
+      value.addEventListener("click", (e) => {
+        e.stopPropagation();
+        value.parentElement.remove();
+
+        addressElement.forEach((value) => {
+          value.innerHTML = "Адрес не выбран!";
+        });
+
+        scheduler.style.display = "none";
+      });
+    });
 
     btnOpen.forEach((value) => {
       value.addEventListener("click", () => {
@@ -55,13 +73,25 @@ class DeliveryModal {
     });
 
     btnSelect.addEventListener("click", () => {
-      deliveryModal.selectAddress(address);
+      this.selectAddress(address);
 
-      deliveryModal.closeModal();
+      this.closeModal();
     });
 
     document.querySelector("#modal-delivery").addEventListener("click", (e) => {
       e.stopPropagation();
+    });
+
+    point.forEach((value) => {
+      value.addEventListener("click", () => {
+        value.childNodes[1].checked = true;
+      });
+    });
+
+    courier.forEach((value) => {
+      value.addEventListener("click", () => {
+        value.childNodes[1].checked = true;
+      });
     });
 
     document.querySelector("#radio-point").checked = true;
@@ -81,14 +111,20 @@ class DeliveryModal {
     const addressElement = document.querySelectorAll("#address");
     const radiosPoint = document.querySelectorAll("#radio-point");
     const radiosCourier = document.querySelectorAll("#radio-courier");
+    const star = document.querySelector("#star-number");
+    const scheduler = document.querySelector(".delivery__point-schedule");
 
     radiosPoint.forEach((value, index) => {
       if (value.checked) {
         let title = data.point[index].address;
+        let stars = data.point[index].stars;
 
         addressElement.forEach((value) => {
           value.innerHTML = title;
         });
+
+        star.innerHTML = stars;
+        scheduler.style.display = "block";
       }
     });
 
@@ -99,6 +135,8 @@ class DeliveryModal {
         addressElement.forEach((value) => {
           value.innerHTML = title;
         });
+
+        scheduler.style.display = "none";
       }
     });
   }
