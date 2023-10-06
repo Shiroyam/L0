@@ -80,15 +80,14 @@ class Product {
 
         countImg.forEach((value) => {
           if (value.id == "delivery-count-1") {
-            return (countImg[1].innerHTML = countProduct.innerHTML);
+            return (countImg[1].innerHTML = Number(countProduct.innerHTML) - 1);
           }
 
           value.innerHTML = countProduct.innerHTML;
         });
 
         this.checkVisibilityCountImg();
-
-        if (data.id === "delivery-product-1") {
+        if (data.id == 1) {
           this.checkVisibilitySplitProductDelivery(
             productWrapperNext.childNodes,
           );
@@ -114,12 +113,16 @@ class Product {
 
         this.selectPayment();
         countImg.forEach((value) => {
+          if (value.id == "delivery-count-1") {
+            return (countImg[1].innerHTML = Number(countProduct.innerHTML) - 1);
+          }
+
           value.innerHTML = countProduct.innerHTML;
         });
 
         this.checkVisibilityCountImg();
 
-        if (data.id === "delivery-product-1") {
+        if (data.id == 1) {
           this.checkVisibilitySplitProductDelivery(
             productWrapperNext.childNodes,
           );
@@ -139,8 +142,11 @@ class Product {
         this.checkVisibilityDeliveryDate(productWrapper);
         this.checkVisibilityCountImg();
 
-        if (data.id === "delivery-count-1") {
-          this.checkVisibilityDeliveryDate(productWrapperNext);
+        if (data.id == 1) {
+          this.checkVisibilityDeliveryDate(
+            productWrapperNext,
+            checkbox.checked,
+          );
         }
       });
 
@@ -151,8 +157,11 @@ class Product {
         this.selectPayment();
         this.checkVisibilityDeliveryDate(productWrapper);
 
-        if (data.id === "delivery-count-1") {
-          this.checkVisibilityDeliveryDate(productWrapperNext);
+        if (data.id == 1) {
+          this.checkVisibilityDeliveryDate(
+            productWrapperNext,
+            checkbox.checked,
+          );
         }
       });
     }
@@ -437,9 +446,9 @@ class Product {
   checkVisibilityProductDelivery(element, checked) {
     element.forEach((value) => {
       if (checked) {
-        value.classList.remove("hidden");
+        value.classList.remove("split-hidden");
       } else {
-        value.classList.add("hidden");
+        value.classList.add("split-hidden");
       }
     });
   }
@@ -452,10 +461,10 @@ class Product {
 
     product.forEach((value, index) => {
       if (lastElement == index) {
-        return value.classList.remove("hidden");
+        return value.classList.remove("split-hidden");
       }
 
-      value.classList.add("hidden");
+      value.classList.add("split-hidden");
     });
   }
 
