@@ -1,4 +1,5 @@
 # WB School: курс «хардкорный JS» (L0)
+Деплой: <a href="l0-dun.vercel.app">l0-dun.vercel.app</a>
 ## Технологии
 - Html
 - Scss (был разрешен)
