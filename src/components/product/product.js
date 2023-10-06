@@ -171,6 +171,7 @@ class Product {
     });
 
     remove.addEventListener("click", () => {
+      const productElement = document.querySelector(".product-wrapper");
       counter.onRemove(`#product-${data.id}`);
 
       deliveryProduct.forEach((value) => {
@@ -178,7 +179,7 @@ class Product {
       });
 
       countHeader.forEach((value) => {
-        value.innerHTML = Number(value.innerHTML) - 1;
+        value.innerHTML = productElement.children.length;
       });
 
       this.calculateTotalPrice();
