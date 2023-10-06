@@ -1,15 +1,47 @@
-## How to run the project localhost ?
+# WB School: курс «хардкорный JS» (L0)
+## Технологии
+- Html
+- Scss (был разрешен)
+- Vite (был разрешен, нужне чтобы собирать scss файлы)
+- Js
+- Husky (Чтобы в репозиторий уходил код прошедший через линтер)
+- Prettier (Линнетр для js)
+- Stylelint (Линнетр для css)
 
-Install with [npm](https://www.npmjs.com/)
+## Как запустить проект в режиме продакшен ?
+
+1.Установить пакеты: 
 
 ```bash
 $ npm install
 ```
 
-and run with [npm](https://www.npmjs.com/)
+2.Запустить билдинг проекта: 
+
+```bash
+$ npm run build
+```
+
+3.Затем запустить проект с помощью команды: 
+
+```bash
+$ npm run preview
+```
+Эта команда запустит приложение в режиме продакшен.
+Откройте  http://127.0.0.1:4173/ в браузере, чтобы увидеть его.
+
+## Как запустить проект в режиме разработки ?
+
+1.Установить пакеты: 
+
+```bash
+$ npm install
+```
+
+2.Затем запустить проект с помощью команды: 
 
 ```bash
 $ npm run dev
 ```
-Runs the app in the development mode.
-Open http://localhost:5173/ to view it in your browse
+Эта команда запустит приложение в режиме разработки.
+Откройте http://localhost:5173/ в браузере, чтобы увидеть его.
