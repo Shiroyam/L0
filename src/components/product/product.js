@@ -80,15 +80,23 @@ class Product {
 
         countImg.forEach((value) => {
           if (value.id == "delivery-count-1") {
-            return (countImg[1].innerHTML = Number(countProduct.innerHTML) - 1);
+            return (countImg[1].innerHTML = countProduct.innerHTML);
           }
 
           value.innerHTML = countProduct.innerHTML;
         });
 
         this.checkVisibilityCountImg();
-        this.checkVisibilitySplitProductDelivery(productWrapperNext.childNodes);
-        this.checkVisibilityDeliveryDate(productWrapperNext, checkbox.checked);
+
+        if (data.id === "delivery-product-1") {
+          this.checkVisibilitySplitProductDelivery(
+            productWrapperNext.childNodes,
+          );
+          this.checkVisibilityDeliveryDate(
+            productWrapperNext,
+            checkbox.checked,
+          );
+        }
       });
     }
 
@@ -106,12 +114,20 @@ class Product {
 
         this.selectPayment();
         countImg.forEach((value) => {
-          value.innerHTML = Number(countProduct.innerHTML) - 1;
+          value.innerHTML = countProduct.innerHTML;
         });
 
         this.checkVisibilityCountImg();
-        this.checkVisibilitySplitProductDelivery(productWrapperNext.childNodes);
-        this.checkVisibilityDeliveryDate(productWrapperNext);
+
+        if (data.id === "delivery-product-1") {
+          this.checkVisibilitySplitProductDelivery(
+            productWrapperNext.childNodes,
+          );
+          this.checkVisibilityDeliveryDate(
+            productWrapperNext,
+            checkbox.checked,
+          );
+        }
       });
     }
 
@@ -121,7 +137,11 @@ class Product {
         this.selectPayment();
         this.checkVisibilityProductDelivery(deliveryProduct, checkbox.checked);
         this.checkVisibilityDeliveryDate(productWrapper);
-        this.checkVisibilityDeliveryDate(productWrapperNext);
+        this.checkVisibilityCountImg();
+
+        if (data.id === "delivery-count-1") {
+          this.checkVisibilityDeliveryDate(productWrapperNext);
+        }
       });
 
       checkboxAll.addEventListener("change", () => {
@@ -130,7 +150,10 @@ class Product {
         this.calculateTotalPrice();
         this.selectPayment();
         this.checkVisibilityDeliveryDate(productWrapper);
-        this.checkVisibilityDeliveryDate(productWrapperNext);
+
+        if (data.id === "delivery-count-1") {
+          this.checkVisibilityDeliveryDate(productWrapperNext);
+        }
       });
     }
 
@@ -154,6 +177,7 @@ class Product {
       this.selectPayment();
       this.checkVisibilityDeliveryDate(productWrapper);
       this.checkVisibilityDeliveryDate(productWrapperNext);
+      this.availabilityCounter();
     });
 
     checkboxPayment.addEventListener("change", () => {
@@ -461,6 +485,15 @@ class Product {
     } else {
       product.parentNode.classList.remove("delivery__date--hidden");
     }
+  }
+
+  availabilityCounter() {
+    const availability = document.querySelector("#availability");
+    const productAvailabilityWrapper = document.querySelector(
+      ".product-wrapper-soldout",
+    );
+
+    availability.innerHTML = productAvailabilityWrapper.children.length;
   }
 
   template(data) {

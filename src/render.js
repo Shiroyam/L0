@@ -7,7 +7,7 @@ import {
   product,
   accordion,
 } from "./components";
-import { checkbox, button } from "./ui";
+import { checkbox, button, counter } from "./ui";
 
 // рендер темплейтов: accordion, products
 (function render() {

@@ -83,6 +83,6 @@ const cartContent = `
   <div class="accordion-wrapper-all">Выбрать все</div>
 `;
 
-const soldoutContent = `<div class="accordion-wrapper-soldout">Отсутствуют · 3 товара</div>`;
+const soldoutContent = `<div class="accordion-wrapper-soldout">Отсутствуют · <span id="availability">3</span> товара</div>`;
 
 export const accordion = new Accordion();

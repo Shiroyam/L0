@@ -13,7 +13,7 @@ export const template = (number = 0, count, id, availability) => {
   ${
     availability
       ? ` <div class="counter__wrapper">
-            <button id="btn-decrement-${id}" class="counter__wrapper-btn">−</button>
+            <button id="btn-decrement-${id}" class="counter__wrapper-btn counter__wrapper-btn--active">−</button>
             <span id="btn-count-${id}" class="counter__wrapper-number">${number}</span>
             <button id="btn-increment-${id}"  class="counter__wrapper-btn counter__wrapper-btn--active">+</button>
           </div>
@@ -69,11 +69,11 @@ export const onIncrement = (id, max) => {
   const increment = document.querySelector(`#btn-increment-${id}`);
   const decrement = document.querySelector(`#btn-decrement-${id}`);
 
-  if (Number(target.innerHTML) == max) {
+  if (Number(target.innerHTML) == max + 1) {
     increment.classList.remove("counter__wrapper-btn--active");
   }
 
-  if (Number(target.innerHTML) <= max) {
+  if (Number(target.innerHTML) <= max + 1) {
     decrement.classList.add("counter__wrapper-btn--active");
     target.innerHTML = Number(target.innerHTML) + 1;
   }
