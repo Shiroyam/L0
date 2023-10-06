@@ -30,7 +30,7 @@ import { checkbox, button } from "./ui";
     .querySelector(".total__payment")
     .insertAdjacentHTML(
       "afterend",
-      button.template("total", "Оплатить 6516 cом"),
+      button.template("total", "Оплатить 16000 cом"),
     );
 
   //modal

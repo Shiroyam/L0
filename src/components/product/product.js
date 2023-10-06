@@ -26,9 +26,20 @@ class Product {
           .querySelector("#delivery__product")
           .insertAdjacentHTML(
             "beforeend",
-            this.deliveryTemplate(data.img[2], data.id),
+            this.deliveryTemplate(data.img[2], data.id, data.value),
           );
       });
+
+    document
+      .querySelector("#delivery__product-next")
+      .insertAdjacentHTML(
+        "beforeend",
+        this.deliveryTemplate(
+          products[1].img[2],
+          products[1].id,
+          products[1].value - 1,
+        ),
+      );
   }
 
   eventListener(data) {
@@ -41,12 +52,16 @@ class Product {
     const checkboxPayment = document.querySelector("#checkbox-payment");
     const btnOOO = document.querySelector(`#OOO-${data.id}`);
     const bntDiscount = document.querySelector(`#wrapper-price-${data.id}`);
-    const deliveryProduct = document.querySelector(
+    const countHeader = document.querySelectorAll("#header-count");
+    const countImg = document.querySelectorAll(`#delivery-count-${data.id}`);
+    const countProduct = document.querySelector(`#btn-count-${data.id}`);
+    const productWrapper = document.querySelector("#delivery__product");
+    const deliveryProduct = document.querySelectorAll(
       `#delivery-product-${data.id}`,
     );
-    const countHeader = document.querySelectorAll("#header-count");
-    const countImg = document.querySelector(`#delivery-count-${data.id}`);
-    const countProduct = document.querySelector(`#btn-count-${data.id}`);
+    const productWrapperNext = document.querySelector(
+      "#delivery__product-next",
+    );
 
     if (increment) {
       increment.addEventListener("click", () => {
@@ -62,7 +77,18 @@ class Product {
 
         this.selectPayment();
         this.fontResize();
-        countImg.innerHTML = countProduct.innerHTML;
+
+        countImg.forEach((value) => {
+          if (value.id == "delivery-count-1") {
+            return (countImg[1].innerHTML = Number(countProduct.innerHTML) - 1);
+          }
+
+          value.innerHTML = countProduct.innerHTML;
+        });
+
+        this.checkVisibilityCountImg();
+        this.checkVisibilitySplitProductDelivery(productWrapperNext.childNodes);
+        this.checkVisibilityDeliveryDate(productWrapperNext, checkbox.checked);
       });
     }
 
@@ -79,7 +105,13 @@ class Product {
         }
 
         this.selectPayment();
-        countImg.innerHTML = countProduct.innerHTML;
+        countImg.forEach((value) => {
+          value.innerHTML = Number(countProduct.innerHTML) - 1;
+        });
+
+        this.checkVisibilityCountImg();
+        this.checkVisibilitySplitProductDelivery(productWrapperNext.childNodes);
+        this.checkVisibilityDeliveryDate(productWrapperNext);
       });
     }
 
@@ -87,13 +119,18 @@ class Product {
       checkbox.addEventListener("change", () => {
         this.calculateTotalPrice();
         this.selectPayment();
+        this.checkVisibilityProductDelivery(deliveryProduct, checkbox.checked);
+        this.checkVisibilityDeliveryDate(productWrapper);
+        this.checkVisibilityDeliveryDate(productWrapperNext);
       });
 
       checkboxAll.addEventListener("change", () => {
         this.selectAll(checkbox, checkboxAll.checked);
-
+        this.checkVisibilityProductDelivery(deliveryProduct, checkbox.checked);
         this.calculateTotalPrice();
         this.selectPayment();
+        this.checkVisibilityDeliveryDate(productWrapper);
+        this.checkVisibilityDeliveryDate(productWrapperNext);
       });
     }
 
@@ -104,15 +141,19 @@ class Product {
     remove.addEventListener("click", () => {
       counter.onRemove(`#product-${data.id}`);
 
-      deliveryProduct.remove();
+      deliveryProduct.forEach((value) => {
+        value.remove();
+      });
 
       countHeader.forEach((value) => {
         value.innerHTML = Number(value.innerHTML) - 1;
       });
 
       this.calculateTotalPrice();
-      this.checkVisibilityCount();
+      this.checkVisibilityCountHeader();
       this.selectPayment();
+      this.checkVisibilityDeliveryDate(productWrapper);
+      this.checkVisibilityDeliveryDate(productWrapperNext);
     });
 
     checkboxPayment.addEventListener("change", () => {
@@ -135,10 +176,9 @@ class Product {
 
     if (bntDiscount) {
       const percent = Number(data.price) / 100;
-      const sale = Math.floor(
-        (Number(data.price) - Number(data.discount)) / percent,
-      );
-      const total = Number(data.price) - Number(data.discount);
+      const sale =
+        Math.floor((Number(data.price) - Number(data.discount)) / percent) - 10;
+      const total = sale * percent;
       const extraDiscount = Math.floor(percent * 10);
 
       this.eventHoverTooltip(
@@ -152,6 +192,9 @@ class Product {
         "beforeend",
       );
     }
+
+    this.splitProductDelivery(countImg);
+    this.checkVisibilityCountImg();
   }
 
   /**
@@ -337,7 +380,7 @@ class Product {
   /**
    * Проверка на количество товаров
    */
-  checkVisibilityCount() {
+  checkVisibilityCountHeader() {
     const countHeader = document.querySelectorAll(`#header-count`);
 
     countHeader.forEach((value) => {
@@ -347,6 +390,77 @@ class Product {
         value.classList.remove("header__icon-hidden");
       }
     });
+  }
+
+  /**
+   * Проверка на количество товаров в картинках
+   */
+  checkVisibilityCountImg() {
+    const countImg = document.querySelectorAll(`.delivery__icon-count`);
+
+    countImg.forEach((value) => {
+      if (value.innerHTML == 1 || value.innerHTML == 0) {
+        value.classList.add("header__icon-hidden");
+      } else {
+        value.classList.remove("header__icon-hidden");
+      }
+    });
+  }
+
+  /**
+   * Отображение картинки продукта в доставке
+   */
+  checkVisibilityProductDelivery(element, checked) {
+    element.forEach((value) => {
+      if (checked) {
+        value.classList.remove("hidden");
+      } else {
+        value.classList.add("hidden");
+      }
+    });
+  }
+
+  /**
+   * Спилт товаров в разные дни доставки
+   */
+  splitProductDelivery(product) {
+    const lastElement = product.length - 1;
+
+    product.forEach((value, index) => {
+      if (lastElement == index) {
+        return value.classList.remove("hidden");
+      }
+
+      value.classList.add("hidden");
+    });
+  }
+
+  checkVisibilitySplitProductDelivery(product) {
+    const count = document.querySelector("#btn-count-1");
+
+    if (count.innerHTML == 1) {
+      return product[1].classList.add("hidden");
+    }
+
+    product[1].classList.remove("hidden");
+  }
+
+  checkVisibilityDeliveryDate(product, checked = true) {
+    const element = product.childNodes;
+    const elementLength = element.length;
+    let number = 0;
+
+    for (let i = 1; i < elementLength; i++) {
+      if (element[i].classList[0] !== "hidden" && checked) {
+        number++;
+      }
+    }
+
+    if (number === 0) {
+      product.parentNode.classList.add("delivery__date--hidden");
+    } else {
+      product.parentNode.classList.remove("delivery__date--hidden");
+    }
   }
 
   template(data) {
@@ -381,17 +495,23 @@ class Product {
           </div>
         </div>
       
-        ${counter.template(1, data.count, data.id, data.availability)}
+        ${counter.template(data.value, data.count, data.id, data.availability)}
       
         ${
           data.availability
             ? `<div class="product__price">
                 <div>
-                  <span id="product-discount-${data.id}" class="product__price-total">${data.discount}</span>
+                  <span id="product-discount-${
+                    data.id
+                  }" class="product__price-total">${
+                    data.discount * data.value
+                  }</span>
                   <span class="product__price-currency">сом</span>
                 </div>
                 <div id="wrapper-price-${data.id}" class="product-discount">
-                  <span id="product-price-${data.id}" class="number">${data.price}</span>
+                  <span id="product-price-${data.id}" class="number">${
+                    data.price * data.value
+                  }</span>
                   <span class="currency">сом</span>
                 </div>
               </div>`
@@ -402,10 +522,10 @@ class Product {
     `;
   }
 
-  deliveryTemplate(img, id) {
+  deliveryTemplate(img, id, count) {
     return `<div id="delivery-product-${id}">
       <img class="img" src="${img}" />
-      <div id="delivery-count-${id}" class="delivery__icon-count">1</div>
+      <div id="delivery-count-${id}" class="delivery__icon-count">${count}</div>
     </div>`;
   }
 }

@@ -156,6 +156,45 @@
               }
             }
           }
+
+          #delivery__product-next {
+            display: flex;
+            gap: 8px;
+
+            div {
+              position: relative;
+
+              .delivery__icon-count {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+        
+                min-width: 16px;
+                height: 16px;
+
+                font-size: 13px;
+                line-height: 14px;
+                color: var(--color-white);
+                text-align: center;
+        
+                background-color: var(--color-orange);
+                border-radius: 50%;
+              }
+
+              .img {
+                width: 40px;
+                height: 56px;
+              }
+            }
+          }
+
+          .hidden {
+            display: none;
+          }
+        }
+
+        &__date--hidden {
+          display: none;
         }
 
         &__description {
@@ -744,7 +783,7 @@
             gap: 0;
           }
 
-          &__date {
+          &__date { 
             flex-direction: column;
           }
         }

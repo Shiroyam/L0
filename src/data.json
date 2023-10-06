@@ -4,15 +4,16 @@
       "id": "0",
       "title": "Футболка UZcotton мужская",
       "img": [
-        "/png/1-product.png",
-        "/png/1-mobile-product.png",
-        "/png/1-bit-product.png"
+        "/png/2-product.png",
+        "/png/2-mobile-product.png",
+        "/png/2-bit-product.png"
       ],
       "color": "белый",
       "size": "56",
-      "count": 1,
-      "price": "1051",
-      "discount": "522",
+      "count": 2,
+      "value": 1,
+      "price": 1000,
+      "discount": 500,
       "IP": "Коледино WB",
       "company": {
         "title": "OOO Вайлдберриз",
@@ -25,15 +26,16 @@
       "id": "1",
       "title": "Силиконовый чехол картхолдер (отверстия) для карт, прозрачный кейс бампер на Apple iPhone XR, MobiSafe",
       "img": [
-        "/png/2-product.png",
-        "/png/2-mobile-product.png",
-        "/png/2-bit-product.png"
+        "/png/1-product.png",
+        "/png/1-mobile-product.png",
+        "/png/1-bit-product.png"
       ],
       "color": "прозрачный",
       "size": null,
-      "count": 200,
-      "price": "11500",
-      "discount": "5500",
+      "count": 20000,
+      "value": 3,
+      "price": 10000,
+      "discount": 5000,
       "IP": "Коледино WB",
       "company": {
         "title": "OOO Вайлдберриз",
@@ -53,8 +55,9 @@
       "color": null,
       "size": null,
       "count": 2,
-      "price": "950",
-      "discount": "494",
+      "value": 1,
+      "price": 2000,
+      "discount": 500,
       "IP": "Коледино WB",
       "company": {
         "title": "OOO Вайлдберриз",
